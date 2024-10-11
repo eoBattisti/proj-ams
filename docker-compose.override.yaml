@@ -1,0 +1,9 @@
+services:
+
+  postgres:
+    env_file:
+      - ./django/envs/database.env
+
+  application:
+    env_file:
+      - ./django/envs/database.env
