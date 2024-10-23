@@ -10,6 +10,7 @@ python = "^3.10"
 django = "5.1.2"
 psycopg2-binary = "2.9.9"
 django-environ = "^0.11.2"
+environ = "^1.0"
 
 
 [build-system]
