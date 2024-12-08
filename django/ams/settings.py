@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+import environ
 from pathlib import Path
 
 from ams.env import env
@@ -28,7 +29,7 @@ SECRET_KEY = 'django-insecure-e&d_(y+$9ix)7=@oq7i18e4hevyaxg7(o@_(je&dwdgx4n!w08
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0']
 
 
 # Application definition
@@ -87,6 +88,8 @@ WSGI_APPLICATION = 'ams.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
+environ.Env.read_env(os.path.join(BASE_DIR, 'envs', 'database.env'))
 
 DATABASES = {
     "default": {
