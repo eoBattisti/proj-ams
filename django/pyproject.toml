@@ -18,7 +18,6 @@ environ = "^1.0"
 ruff = "0.8.2"
 bandit = "^1.8.0"
 pytest = "^8.3.4"
-pytest-cov = "^6.0.0"
 pytest-django = "^4.9.0"
 
 [build-system]
@@ -160,7 +159,7 @@ docstring-code-line-length = "dynamic"
 force-single-line = true
 
 [tool.pytest.ini_options]
-SECRET_KEY = "testsecretkey"
 DJANGO_SETTINGS_MODULE = "ams.settings"
-addopts = "-s -vv --failed-first -x" 
+addopts = "-s -vv -x --cache-clear" 
+cache_dir = "/tmp/.pytest_cache"
 python_files = ["tests/test_*.py"]
