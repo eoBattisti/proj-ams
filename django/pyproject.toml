@@ -160,6 +160,7 @@ docstring-code-line-length = "dynamic"
 force-single-line = true
 
 [tool.pytest.ini_options]
+SECRET_KEY = "testsecretkey"
 DJANGO_SETTINGS_MODULE = "ams.settings"
 addopts = "-s -vv --failed-first -x --cov-branch --cov-append --no-cov-on-fail --cov-report term-missing --cov-report html --cov"
 python_files = ["tests/test_*.py"]
