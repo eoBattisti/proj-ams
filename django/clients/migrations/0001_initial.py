@@ -6,36 +6,34 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Address',
+            name="Address",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('street', models.CharField(max_length=100)),
-                ('number', models.IntegerField()),
-                ('neighborhood', models.CharField(max_length=100)),
-                ('city', models.CharField(max_length=100)),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("street", models.CharField(max_length=100)),
+                ("number", models.IntegerField()),
+                ("neighborhood", models.CharField(max_length=100)),
+                ("city", models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
-            name='Client',
+            name="Client",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('Created At', models.DateTimeField(auto_now_add=True)),
-                ('Updated At', models.DateTimeField(auto_now=True)),
-                ('name', models.TextField()),
-                ('phone', models.TextField()),
-                ('annotations', models.TextField()),
-                ('address', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='clients.address')),
+                ("id", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ("Created At", models.DateTimeField(auto_now_add=True)),
+                ("Updated At", models.DateTimeField(auto_now=True)),
+                ("name", models.TextField()),
+                ("phone", models.TextField()),
+                ("annotations", models.TextField()),
+                ("address", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="clients.address")),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]
