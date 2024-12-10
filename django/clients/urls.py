@@ -3,7 +3,7 @@ from django.urls import path
 from .views import ClientListView, ClientDetailView, ClientCreateView, ClientUpdateView, ClientDeleteView, client_list
 from clients import views
 
-app_name = 'clients'
+app_name = "clients"
 
 urlpatterns = [
     # path('', views.ClientsListView.as_view(), name='list'),

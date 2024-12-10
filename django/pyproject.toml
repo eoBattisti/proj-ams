@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "An Atelier Management System to help seamstresses manage orders, incomes, expenses, etc."
 authors = ["Nicolas Battisti <nickgabrielbd@gmail.com>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -13,6 +14,152 @@ django-environ = "^0.11.2"
 environ = "^1.0"
 
 
+[tool.poetry.group.dev.dependencies]
+ruff = "0.8.2"
+bandit = "^1.8.0"
+pytest = "^8.3.4"
+pytest-django = "^4.9.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+
+# See more in: https://bandit.readthedocs.io/en/latest/plugins/index.html#complete-test-plugin-listing
+tests = [
+  "B610",
+  "B611",
+] 
+skips = ["B601"]
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+# Same as Black.
+line-length = 120
+indent-width = 4
+
+# Assume Python 3.9
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "A",  # [flake8-builtins](https://pypi.org/project/flake8-builtins/)
+    "B",  # [flake8-bugbear](https://pypi.org/project/flake8-bugbear/)
+    # "ARG",  # [flake8-unused-arguments](https://pypi.org/project/flake8-unused-arguments/)
+    # "BLE",  # [flake8-blind-except](https://pypi.org/project/flake8-blind-except/)
+    # "C4",   # [flake8-comprehensions](https://pypi.org/project/flake8-comprehensions/)
+    # "C90",  # [mccabe complexity](https://pypi.org/project/mccabe/)
+    # "COM",  # [flake8-commas](https://pypi.org/project/flake8-commas/)
+    # "D",    # [pydocstyle](https://pypi.org/project/pydocstyle/)
+    "DJ",     # [django-specific rules](https://beta.ruff.rs/docs/rules/#django-specific-rules-dj)
+    "DTZ",    # [flake8-datetimez](https://pypi.org/project/flake8-datetimez/)
+    # "E",    # [pycodestyle](https://pypi.org/project/pycodestyle/)
+    # "EM",   # [flake8-errmsg](https://pypi.org/project/flake8-errmsg/)
+    # "ERA",  # [eradicate](https://pypi.org/project/eradicate/)
+    "F",  # [pyflake](https://pypi.org/project/pyflakes/)
+    # "FBT",  # [flake8-boolean-trap](https://pypi.org/project/flake8-boolean-trap/)
+    # "FLY",  # [flynt](https://pypi.org/project/flynt/)
+    # "ICN",  # [flake8-import-conventions](https://github.com/joaopalmeiro/flake8-import-conventions)
+    # "ISC",  # [flake8-implicit-str-concat](https://pypi.org/project/flake8-implicit-str-concat/)
+    # "N",    # [pep8-naming](https://pypi.org/project/pep8-naming/)
+    # "NPY",  # [NumPy-specific rules](https://beta.ruff.rs/docs/rules/#numpy-specific-rules-npy)
+    # "PD",   # [pandas-vet](https://pypi.org/project/pandas-vet/)
+    # "PERF", # [Perflint](https://pypi.org/project/perflint/)
+    # "PIE",  # [flake8-pie](https://pypi.org/project/flake8-pie/)
+    "PT", # [flake8-pytest-style](https://pypi.org/project/flake8-pytest-style/)
+    # "PTH",  # [flake8-use-pathlib](https://pypi.org/project/flake8-use-pathlib/)
+    # "PYI",  # [flake8-pyi](https://pypi.org/project/flake8-pyi/)
+    # "Q",    # [flake8-quotes](https://pypi.org/project/flake8-quotes/)
+    # "RET",  # [flake8-return](https://pypi.org/project/flake8-return/)
+    # "RSE",  # [flake8-raise](https://pypi.org/project/flake8-raise/)
+    # "RUF",  # [Ruff-specific rules](https://beta.ruff.rs/docs/rules/#ruff-specific-rules-ruf)
+    # "S",    # [flake8-bandit](https://pypi.org/project/flake8-bandit/)
+    # "SIM",  # [flake8-simplify](https://pypi.org/project/flake8-simplify/)
+    # "SLF",  # [flake8-self](https://pypi.org/project/flake8-self/)
+    # "SLOT", # [flake8-slots](https://pypi.org/project/flake8-slots/)
+    # "T10",  # [flake8-debugger](https://pypi.org/project/flake8-debugger/)
+    # "T20",  # [flake8-print](https://pypi.org/project/flake8-print/)
+    # "TD",   # [flake8-todos](https://github.com/orsinium-labs/flake8-todos/)
+    # "TID",  # [flake8-tidy-imports](https://pypi.org/project/flake8-tidy-imports/)
+    # "TRY",  # [tryceratops](https://pypi.org/project/tryceratops/)
+    # "UP",   # [pyupgrade](https://pypi.org/project/pyupgrade/)
+    "W",  # [pycodestyle](https://pypi.org/project/pycodestyle/)
+]
+ignore = []
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+#
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+docstring-code-format = false
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+#
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+docstring-code-line-length = "dynamic"
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402", "F401", "I001"]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "ams.settings"
+addopts = "-s -vv -x --cache-clear" 
+cache_dir = "/tmp/.pytest_cache"
+python_files = ["tests/test_*.py"]
