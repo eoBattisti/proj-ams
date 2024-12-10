@@ -7,3 +7,4 @@ services:
   application:
     env_file:
       - ./django/envs/database.env
+      - ./django/envs/ams.env

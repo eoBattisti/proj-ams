@@ -7,5 +7,6 @@ class HomeRedirectView(LoginRequiredMixin, RedirectView):
     """
     Redirects the user to the clients list view if he is logged in.
     """
+
     def get_redirect_url(self, *args, **kwargs):
-        return reverse_lazy('clients:list')
+        return reverse_lazy("clients:list")
