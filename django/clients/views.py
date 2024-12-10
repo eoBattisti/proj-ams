@@ -7,9 +7,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Client
 
-# class ClientsListView(LoginRequiredMixin, TemplateView):
-#     template_name = 'clients/list.html'
-
 class ClientListView(ListView):
     model = Client
     template_name = "list.html"
@@ -17,22 +14,19 @@ class ClientListView(ListView):
     
 class ClientDetailView(DetailView):
     model = Client
-    template_name = "client_detail.html"
+    template_name = "detail.html"
     context_object_name = "clients"
     
 class ClientCreateView(CreateView):
     model = Client
-    template_name = "client_create.html"
+    template_name = "create.html"
     fields = ['name', 'phone', 'annotations', 'address']
     
 class ClientUpdateView(UpdateView):
     model = Client
-    template_name = "client_update.html"
+    template_name = "update.html"
     fields = ['name', 'phone', 'annotations']
     
 class ClientDeleteView(DeleteView):
     model = Client
     success_url = reverse_lazy('list.html')
-    
-def client_list(request):
-    return render(request, 'clients/list.html')
