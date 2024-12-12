@@ -34,7 +34,7 @@ class ClientForm(forms.ModelForm):
     def clean_number(self):
         number = self.cleaned_data.get("number")
         if number <= 0:
-            raise forms.ValidationError('O numero deve ser diferente de 0')
+            raise forms.ValidationError("O numero deve ser diferente de 0")
         return number
 
     def clean_street(self):
@@ -60,7 +60,7 @@ class ClientForm(forms.ModelForm):
             street=self.cleaned_data["street"],
             number=self.cleaned_data["number"],
             neighborhood=self.cleaned_data["neighborhood"],
-            city=self.cleaned_data["city"]
+            city=self.cleaned_data["city"],
         )
 
         client = super().save(commit=False)
