@@ -25,7 +25,7 @@ class ClientForm(forms.ModelForm):
             raise forms.ValidationError('O campo "Telefone" não pode estar vazio.')
 
         pattern = r'^\(\d{2}\)\s?\d{4,5}-\d{4}$'
-        
+
         if not re.match(pattern, phone):
             raise forms.ValidationError('O telefone deve estar no formato (XX) XXXXX-XXXX.')
         return phone
@@ -35,19 +35,19 @@ class ClientForm(forms.ModelForm):
         if number <= 0:
             raise forms.ValidationError('O numero deve ser diferente de 0')
         return number
-    
+
     def clean_street(self):
         street = self.cleaned_data.get('street')
         if not street:
             raise forms.ValidationError('O campo "Rua" não pode estar vazio.')
         return street
-    
+
     def clean_neighborhood(self):
         neighborhood = self.cleaned_data.get('neighborhood')
         if not neighborhood:
             raise forms.ValidationError('O campo "Bairro" não pode estar vazio.')
         return neighborhood
-    
+
     def clean_city(self):
         city = self.cleaned_data.get('city')
         if not city:
