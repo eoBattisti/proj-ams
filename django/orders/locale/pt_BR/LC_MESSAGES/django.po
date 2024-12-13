@@ -20,35 +20,35 @@ msgstr ""
 
 #: orders/models.py:10 orders/models.py:30
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #: orders/models.py:12 orders/models.py:32
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #: orders/models.py:17
 msgid "The Base Value must be greater than 0"
-msgstr ""
+msgstr "O Valor Base deve ser maior que 0"
 
 #: orders/models.py:21 orders/models.py:41
 msgid "Order Type"
-msgstr ""
+msgstr "Tipo de Serviço"
 
 #: orders/models.py:22
 msgid "Order Types"
-msgstr ""
+msgstr "Tipos de Serviços"
 
 #: orders/models.py:37
 msgid "The Value must be greater than 0"
-msgstr ""
+msgstr "O Valor deve ser maior que 0"
 
 #: orders/models.py:45
 msgid "Order"
-msgstr ""
+msgstr "Serviço"
 
 #: orders/models.py:46
 msgid "Orders"
-msgstr ""
+msgstr "Serviços"
 
 #: orders/templates/orders/detail.html:2
 msgid "Hello"
