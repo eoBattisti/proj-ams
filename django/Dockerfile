@@ -15,7 +15,7 @@ ENV HOME=/home/${USERNAME}
 RUN apt update && apt upgrade -y
 
 RUN apt -y install libpq-dev python3-dev gcc netcat-traditional make cron \
-        postgresql postgresql-contrib build-essential
+        postgresql postgresql-contrib build-essential gettext
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 

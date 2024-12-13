@@ -14,6 +14,8 @@ import os
 import environ
 from pathlib import Path
 
+from django.utils.translation import gettext_lazy as _
+
 from ams.env import env
 
 
@@ -48,7 +50,12 @@ INTERNAL_APPS = [
 
 THIRD_PARTY_APPS = []
 
-LOCAL_APPS = ["ams", "clients", "core"]
+LOCAL_APPS = [
+    "ams",
+    "clients",
+    "core",
+    "orders",
+]
 
 INSTALLED_APPS = INTERNAL_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -60,6 +67,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
 ]
 
 ROOT_URLCONF = "ams.urls"
@@ -121,7 +129,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGES = [
+    ("en-us", _("English")),
+    ("pt-br", _("Brazilian Portuguese")),
+]
+LANGUAGE_CODE = "pt-br"
+
+LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
+
 
 TIME_ZONE = "America/Sao_Paulo"
 
