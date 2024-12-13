@@ -7,42 +7,73 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='OrderType',
+            name="OrderType",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('Created At', models.DateTimeField(auto_now_add=True)),
-                ('Updated At', models.DateTimeField(auto_now=True)),
-                ('description', models.CharField(max_length=255, verbose_name='Description')),
-                ('base_value', models.DecimalField(decimal_places=2, max_digits=10, validators=[django.core.validators.MinValueValidator(limit_value=0, message='The Base Value must be greater than 0')], verbose_name='Value')),
+                ("id", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ("Created At", models.DateTimeField(auto_now_add=True)),
+                ("Updated At", models.DateTimeField(auto_now=True)),
+                ("description", models.CharField(max_length=255, verbose_name="Description")),
+                (
+                    "base_value",
+                    models.DecimalField(
+                        decimal_places=2,
+                        max_digits=10,
+                        validators=[
+                            django.core.validators.MinValueValidator(
+                                limit_value=0, message="The Base Value must be greater than 0"
+                            )
+                        ],
+                        verbose_name="Value",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Order Type',
-                'verbose_name_plural': 'Order Types',
-                'ordering': ('description',),
+                "verbose_name": "Order Type",
+                "verbose_name_plural": "Order Types",
+                "ordering": ("description",),
             },
         ),
         migrations.CreateModel(
-            name='Order',
+            name="Order",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('Created At', models.DateTimeField(auto_now_add=True)),
-                ('Updated At', models.DateTimeField(auto_now=True)),
-                ('description', models.CharField(max_length=255, verbose_name='Description')),
-                ('value', models.DecimalField(blank=True, decimal_places=2, max_digits=10, validators=[django.core.validators.MinValueValidator(limit_value=0, message='The Value must be greater than 0')], verbose_name='Value')),
-                ('order_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders', to='orders.ordertype', verbose_name='Order Type')),
+                ("id", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ("Created At", models.DateTimeField(auto_now_add=True)),
+                ("Updated At", models.DateTimeField(auto_now=True)),
+                ("description", models.CharField(max_length=255, verbose_name="Description")),
+                (
+                    "value",
+                    models.DecimalField(
+                        blank=True,
+                        decimal_places=2,
+                        max_digits=10,
+                        validators=[
+                            django.core.validators.MinValueValidator(
+                                limit_value=0, message="The Value must be greater than 0"
+                            )
+                        ],
+                        verbose_name="Value",
+                    ),
+                ),
+                (
+                    "order_type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="orders",
+                        to="orders.ordertype",
+                        verbose_name="Order Type",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Order',
-                'verbose_name_plural': 'Orders',
-                'ordering': ('description',),
+                "verbose_name": "Order",
+                "verbose_name_plural": "Orders",
+                "ordering": ("description",),
             },
         ),
     ]
