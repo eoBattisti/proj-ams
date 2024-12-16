@@ -9,6 +9,14 @@ echo "Migrate..."
 poetry run  python manage.py migrate --noinput
 echo "Migrated!"
 
+echo "Generating translations messages..."
+poetry run python3 manage.py makemessages --all --no-obsolete
+echo "Trasnslatad generated!"
+
+echo "Compiling messages..."
+poetry run python3 manage.py compilemessages -v 3
+echo "Compiled messages!"
+
 echo "Loading fixtures..."
 poetry run python manage.py loaddata */fixtures/*.json
 echo "Done!"
