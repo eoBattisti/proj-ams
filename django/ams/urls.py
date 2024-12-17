@@ -10,4 +10,7 @@ urlpatterns = [
     path("clients/", include("clients.urls")),
     path("orders/", include("orders.urls.orders")),
     path("order-types/", include("orders.urls.order_types")),
+    path("tasks/", include("tasks.urls.tasks")),
+    path("task-types/", include("tasks.urls.task_types")),
+
 ]
