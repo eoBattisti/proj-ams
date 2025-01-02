@@ -15,8 +15,11 @@ import environ
 from pathlib import Path
 
 from django.utils.translation import gettext_lazy as _
+from loguru import logger
+import loguru
 
 from ams.env import env
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -48,7 +51,9 @@ INTERNAL_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    'django_loguru'
+]
 
 LOCAL_APPS = [
     "ams",
@@ -59,6 +64,12 @@ LOCAL_APPS = [
 
 INSTALLED_APPS = INTERNAL_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
+DJANGO_LOGGING_MIDDLEWARE = {
+    "DEFAULT_FORMAT": True,
+    "MESSAGE_FORMAT": "<b><green>{time}</green> <cyan>{message}</cyan></b>",
+    "LOG_USER": False,
+}
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -68,6 +79,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+#    "core.loguru_middleware.DjangoLoguruMiddleware",
 ]
 
 ROOT_URLCONF = "ams.urls"
@@ -144,6 +156,59 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+LOGURU_LOGGER_CONFIG = {
+    "depth": 0,
+    "core": loguru._Core(),
+    "exception":None,
+    "record":False,
+    "lazy":False,
+    "colors":False,
+    "raw":False,
+    "capture":True,
+    "patchers":[],
+    "extra":{},
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": True,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {funcName} {lineno} - {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "class": 'core.loguru_middleware.LoguruHandler',
+            "formatter": "verbose",
+        },
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": "celery.log",
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "celery": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": True,
+        },
+        "django": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": True,
+        },
+    },
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

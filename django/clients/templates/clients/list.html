@@ -1,1 +1,18 @@
-XPTO
+{% load static i18n %}
+{% block content %}
+  <h1>Clientes</h1>
+  <table>
+    <tr>
+      <th>Nome</th>
+      <th>Telefone</th>
+      <th>Endereço</th>
+    </tr>
+    {% for client in clients %}
+      <tr>
+        <td>{{ client.name }}</td>
+        <td>{{ client.phone }}</td>
+        <td>{{ client.address }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
