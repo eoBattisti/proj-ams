@@ -1,5 +1,6 @@
 from decimal import Decimal
 from django.db import models
+from django.core.validators import MinValueValidator
 from django.utils.translation import gettext_lazy as _
 
 from core.models import AbstractBaseModel
@@ -8,7 +9,16 @@ from core.models import AbstractBaseModel
 class Material(AbstractBaseModel):
 
     description = models.TextField(verbose_name=_("Description"), null=False, blank=False)
-    value = models.DecimalField(verbose_name=_("Value"), max_digits=10, decimal_places=2, null=False, blank=False)
+    value = models.DecimalField(
+        verbose_name=_("Value"),
+        max_digits=10,
+        decimal_places=2,
+        null=False,
+        blank=False,
+        validators=[
+            MinValueValidator(limit_value=0, message=_("Material value must be greater than 0"))
+        ]
+    )
 
     class Meta:
         verbose_name = _("Material")
@@ -30,7 +40,16 @@ class Garment(AbstractBaseModel):
 
     name = models.CharField(verbose_name=_("Name"), max_length=255, null=False, blank=False)
     size = models.PositiveSmallIntegerField(verbose_name=_("Size"), null=False, blank=False, choices=GarmentSize)
-    value = models.DecimalField(verbose_name=_("Value"), max_digits=10, decimal_places=2, null=False, blank=False)
+    value = models.DecimalField(
+        verbose_name=_("Value"),
+        max_digits=10,
+        decimal_places=2,
+        null=False,
+        blank=False,
+        validators=[
+            MinValueValidator(limit_value=0, message=_("Garment value must be greater than 0"))
+        ]
+    )
     description = models.TextField(verbose_name=_("Description"), null=False, blank=False)
     materials = models.ManyToManyField(verbose_name=_("Materials"), to=Material, related_name="garments")
 
