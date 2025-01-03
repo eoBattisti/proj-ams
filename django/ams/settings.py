@@ -134,7 +134,7 @@ LANGUAGES = [
     ("en-us", _("English")),
     ("pt-br", _("Brazilian Portuguese")),
 ]
-LANGUAGE_CODE = "pt-br"
+LANGUAGE_CODE = "en-us"
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
 
