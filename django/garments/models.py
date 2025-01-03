@@ -7,7 +7,6 @@ from core.models import AbstractBaseModel
 
 
 class Material(AbstractBaseModel):
-
     description = models.TextField(verbose_name=_("Description"), null=False, blank=False)
     value = models.DecimalField(
         verbose_name=_("Value"),
@@ -15,9 +14,7 @@ class Material(AbstractBaseModel):
         decimal_places=2,
         null=False,
         blank=False,
-        validators=[
-            MinValueValidator(limit_value=0, message=_("Material value must be greater than 0"))
-        ]
+        validators=[MinValueValidator(limit_value=0, message=_("Material value must be greater than 0"))],
     )
 
     class Meta:
@@ -31,7 +28,6 @@ class Material(AbstractBaseModel):
 
 
 class Garment(AbstractBaseModel):
-
     class GarmentSize(models.IntegerChoices):
         SMALL = 1, _("Small")
         MEDIUM = 2, _("Medium")
@@ -46,9 +42,7 @@ class Garment(AbstractBaseModel):
         decimal_places=2,
         null=False,
         blank=False,
-        validators=[
-            MinValueValidator(limit_value=0, message=_("Garment value must be greater than 0"))
-        ]
+        validators=[MinValueValidator(limit_value=0, message=_("Garment value must be greater than 0"))],
     )
     description = models.TextField(verbose_name=_("Description"), null=False, blank=False)
     materials = models.ManyToManyField(verbose_name=_("Materials"), to=Material, related_name="garments")

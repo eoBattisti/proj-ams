@@ -1,15 +1,5 @@
-from garments.views.garments import (
-    GarmentCreateView,
-    GarmentDetailView,
-    GarmentListView,
-    GarmentUpdateView
-)
-from garments.views.materials import (
-    MaterialCreateView,
-    MaterialDetailView,
-    MaterialListView,
-    MaterialUpdateView
-)
+from garments.views.garments import GarmentCreateView, GarmentDetailView, GarmentListView, GarmentUpdateView
+from garments.views.materials import MaterialCreateView, MaterialDetailView, MaterialListView, MaterialUpdateView
 
 __all__ = [
     "GarmentCreateView",
