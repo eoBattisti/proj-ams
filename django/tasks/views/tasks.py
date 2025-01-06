@@ -13,10 +13,12 @@ class TaskListView(LoginRequiredMixin, ListView):
     template_name = "task/list.html"
     context_object_name = "tasks"
 
+
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = "task/detail.html"
     context_object_name = "task"
+
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
@@ -24,11 +26,13 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     form_class = TaskForm
     success_url = reverse_lazy("task:list")
 
+
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     template_name = "task/form.html"
     form_class = TaskForm
     success_url = reverse_lazy("task:list")
+
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task

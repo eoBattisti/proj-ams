@@ -8,7 +8,7 @@ from core.models import AbstractBaseModel
 
 
 class TaskType(AbstractBaseModel):
-    description = models.CharField(verbose_name =_("Description"), max_length=255, null=False, blank=False)
+    description = models.CharField(verbose_name=_("Description"), max_length=255, null=False, blank=False)
     base_value = models.DecimalField(
         verbose_name=_("Base Value"),
         max_digits=10,

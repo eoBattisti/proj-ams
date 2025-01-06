@@ -12,5 +12,4 @@ urlpatterns = [
     path("order-types/", include("orders.urls.order_types")),
     path("tasks/", include("tasks.urls.tasks")),
     path("task-types/", include("tasks.urls.task_types")),
-
 ]
