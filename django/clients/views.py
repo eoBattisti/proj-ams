@@ -1,5 +1,7 @@
+
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.urls import reverse
@@ -39,3 +41,5 @@ class ClientDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse("clients/list.html")
+class ClientsListView(LoginRequiredMixin, TemplateView):
+    template_name = "clients/list.html"

@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-12 16:35-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: orders/models.py:10 orders/models.py:30
+msgid "Description"
+msgstr "Descrição"
+
+#: orders/models.py:12 orders/models.py:32
+msgid "Value"
+msgstr "Valor"
+
+#: orders/models.py:17
+msgid "The Base Value must be greater than 0"
+msgstr "O Valor Base deve ser maior que 0"
+
+#: orders/models.py:21 orders/models.py:41
+msgid "Order Type"
+msgstr "Tipo de Serviço"
+
+#: orders/models.py:22
+msgid "Order Types"
+msgstr "Tipos de Serviços"
+
+#: orders/models.py:37
+msgid "The Value must be greater than 0"
+msgstr "O Valor deve ser maior que 0"
+
+#: orders/models.py:45
+msgid "Order"
+msgstr "Serviço"
+
+#: orders/models.py:46
+msgid "Orders"
+msgstr "Serviços"
+
+#: orders/templates/orders/detail.html:2
+msgid "Hello"
+msgstr "Olá"
