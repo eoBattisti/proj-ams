@@ -3,7 +3,6 @@ from core.models import AbstractBaseModel
 from django.utils.translation import gettext_lazy as _
 
 
-
 class Address(models.Model):
 
     street = models.CharField(verbose_name=_("Rua"), max_length=100)
