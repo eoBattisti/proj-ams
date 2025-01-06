@@ -10,7 +10,7 @@ poetry run  python manage.py migrate --noinput
 echo "Migrated!"
 
 echo "Generating translations messages..."
-poetry run python3 manage.py makemessages --all --no-obsolete
+poetry run python3 manage.py makemessages -l pt_BR
 echo "Trasnslatad generated!"
 
 echo "Compiling messages..."
