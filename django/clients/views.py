@@ -41,5 +41,7 @@ class ClientDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse("clients/list.html")
+
+
 class ClientsListView(LoginRequiredMixin, TemplateView):
     template_name = "clients/list.html"
