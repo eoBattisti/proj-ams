@@ -56,6 +56,7 @@ LOCAL_APPS = [
     "core",
     "orders",
     "garments",
+    "sales",
 ]
 
 INSTALLED_APPS = INTERNAL_APPS + THIRD_PARTY_APPS + LOCAL_APPS

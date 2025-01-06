@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-03 21:34+0000\n"
+"POT-Creation-Date: 2025-01-06 19:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,58 +17,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: garments/models.py:11 garments/models.py:53
+
+#: garments/models.py:10 garments/models.py:47
 msgid "Description"
 msgstr "Descrição"
 
-#: garments/models.py:13 garments/models.py:44
+#: garments/models.py:12 garments/models.py:40
 msgid "Value"
 msgstr "Valor"
 
-#: garments/models.py:19
+#: garments/models.py:17
 msgid "Material value must be greater than 0"
 msgstr "O valor do material deve ser maior que 0"
 
-#: garments/models.py:24
+#: garments/models.py:21
 msgid "Material"
 msgstr "Material"
 
-#: garments/models.py:25 garments/models.py:54
+#: garments/models.py:22 garments/models.py:48
 msgid "Materials"
 msgstr "Materiais"
 
-#: garments/models.py:36
+#: garments/models.py:32
 msgid "Small"
 msgstr "P"
 
-#: garments/models.py:37
+#: garments/models.py:33
 msgid "Medium"
 msgstr "M"
 
-#: garments/models.py:38
+#: garments/models.py:34
 msgid "Large"
 msgstr "G"
 
-#: garments/models.py:39
+#: garments/models.py:35
 msgid "Extra Large"
 msgstr "XG"
 
-#: garments/models.py:41
+#: garments/models.py:37
 msgid "Name"
 msgstr "Nome"
 
-#: garments/models.py:42
+#: garments/models.py:38
 msgid "Size"
 msgstr "Tamanho"
 
-#: garments/models.py:50
+#: garments/models.py:45
 msgid "Garment value must be greater than 0"
 msgstr "O valor da peça deve ser maior que 0"
 
-#: garments/models.py:57
+#: garments/models.py:51
 msgid "Garment"
 msgstr "Peça"
 
-#: garments/models.py:58
+#: garments/models.py:52
 msgid "Garments"
 msgstr "Peças"

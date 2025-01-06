@@ -12,4 +12,5 @@ urlpatterns = [
     path("materials/", include("garments.urls.materials")),
     path("orders/", include("orders.urls.orders")),
     path("order-types/", include("orders.urls.order_types")),
+    path("sales/", include("sales.urls")),
 ]
