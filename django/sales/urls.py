@@ -11,4 +11,3 @@ urlpatterns = [
     path("create/", views.SaleCreateView.as_view(), name="create"),
     path("<uuid:pk>/update/", views.SaleUpdateView.as_view(), name="update"),
 ]
-

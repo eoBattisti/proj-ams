@@ -6,30 +6,29 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('clients', '0001_initial'),
-        ('garments', '0001_initial'),
+        ("clients", "0001_initial"),
+        ("garments", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Sale',
+            name="Sale",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('Created At', models.DateTimeField(auto_now_add=True)),
-                ('Updated At', models.DateTimeField(auto_now=True)),
-                ('quantity', models.PositiveIntegerField(verbose_name='Quantity')),
-                ('total', models.DecimalField(decimal_places=2, max_digits=10, verbose_name='Total')),
-                ('saled_at', models.DateTimeField(verbose_name='Saled At')),
-                ('client', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='clients.client')),
-                ('garment', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='garments.garment')),
+                ("id", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ("Created At", models.DateTimeField(auto_now_add=True)),
+                ("Updated At", models.DateTimeField(auto_now=True)),
+                ("quantity", models.PositiveIntegerField(verbose_name="Quantity")),
+                ("total", models.DecimalField(decimal_places=2, max_digits=10, verbose_name="Total")),
+                ("saled_at", models.DateTimeField(verbose_name="Saled At")),
+                ("client", models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to="clients.client")),
+                ("garment", models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to="garments.garment")),
             ],
             options={
-                'verbose_name': 'Sale',
-                'verbose_name_plural': 'Sales',
+                "verbose_name": "Sale",
+                "verbose_name_plural": "Sales",
             },
         ),
     ]
