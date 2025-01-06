@@ -15,3 +15,4 @@ urlpatterns = [
     path("tasks/", include("tasks.urls.tasks")),
     path("task-types/", include("tasks.urls.task_types")),
     path("sales/", include("sales.urls")),
+]
