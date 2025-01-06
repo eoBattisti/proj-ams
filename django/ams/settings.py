@@ -55,6 +55,7 @@ LOCAL_APPS = [
     "clients",
     "core",
     "orders",
+    "garments",
 ]
 
 INSTALLED_APPS = INTERNAL_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -133,10 +134,9 @@ LANGUAGES = [
     ("en-us", _("English")),
     ("pt-br", _("Brazilian Portuguese")),
 ]
-LANGUAGE_CODE = "pt-br"
+LANGUAGE_CODE = "en-us"
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
-
 
 TIME_ZONE = "America/Sao_Paulo"
 
