@@ -16,7 +16,6 @@ class Client(AbstractBaseModel):
     name = models.TextField()
     phone = models.TextField()
     annotations = models.TextField()
-
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
 
     def __str__(self):
