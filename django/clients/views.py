@@ -1,9 +1,9 @@
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView,DetailView, CreateView, UpdateView, DeleteView
 
 from django.urls import reverse
 from .models import Client
-from .forms import ClientForm
 
 
 class ClientListView(LoginRequiredMixin, ListView):
