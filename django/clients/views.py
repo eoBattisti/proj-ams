@@ -1,11 +1,14 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-from django.urls import reverse_lazy
+from django.urls import reverse
 from .models import Client
+from .forms import ClientForm
 
-class ClientListView(ListView):
+
+class ClientListView(LoginRequiredMixin, ListView):
     model = Client
-    template_name = "list.html"
+    template_name = "clients/list.html"
     context_object_name = "clients"
 
 class ClientDetailView(DetailView):
@@ -25,4 +28,9 @@ class ClientUpdateView(UpdateView):
 
 class ClientDeleteView(DeleteView):
     model = Client
-    success_url = reverse_lazy('list.html')
+
+    def get_success_url(self):
+        return reverse("clients/list.html")
+
+class ClientsListView(LoginRequiredMixin, TemplateView):
+    template_name = "clients/list.html"
