@@ -1,16 +1,10 @@
-from tasks.views.tasks import (
-    TaskListView,
-    TaskDetailView,
-    TaskCreateView,
-    TaskUpdateView,
-    TaskDeleteView
-)
+from tasks.views.tasks import TaskListView, TaskDetailView, TaskCreateView, TaskUpdateView, TaskDeleteView
 from tasks.views.task_type import (
     TaskTypeDeleteView,
     TaskTypeListView,
     TaskTypeDetailView,
     TaskTypeCreateView,
-    TaskTypeUpdateView
+    TaskTypeUpdateView,
 )
 
 
@@ -24,5 +18,5 @@ __all__ = [
     "TaskTypeCreateView",
     "TaskTypeUpdateView",
     "TaskDeleteView",
-    "TaskTypeDeleteView"
+    "TaskTypeDeleteView",
 ]
