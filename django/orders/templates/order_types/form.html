@@ -1,4 +1,15 @@
-<form method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <input type="submit" value="Save" />
-</form>
+{% load i18n %}
+
+{% block title %}{% endblock title %}
+
+{% block page-title %}
+{% endblock page-title %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active" aria-current="page"><a href=""></a></li>
+</ol>
+{% endblock breadcrumb %}
+
+{% block content %}
+{% endblock content %}

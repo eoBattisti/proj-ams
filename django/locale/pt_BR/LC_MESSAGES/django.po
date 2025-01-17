@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 17:40-0300\n"
+"POT-Creation-Date: 2025-01-10 15:29-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,6 +26,7 @@ msgstr ""
 msgid "Brazilian Portuguese"
 msgstr ""
 
+<<<<<<< HEAD
 #: clients/models.py:7
 msgid "Rua"
 msgstr ""
@@ -51,16 +52,83 @@ msgid "Telefone"
 msgstr ""
 
 #: clients/models.py:19
+=======
+#: ams/templates/components/navbar.html:14
+msgid "Sewing"
+msgstr "Costura"
+
+#: ams/templates/components/navbar.html:21 tasks/models.py:47
+msgid "Tasks"
+msgstr "Serviços"
+
+#: ams/templates/components/navbar.html:27 tasks/models.py:23
+msgid "Task Types"
+msgstr "Tipos de serviços"
+
+#: ams/templates/components/navbar.html:34
+msgid "Services"
+msgstr "Serviços"
+
+#: ams/templates/components/navbar.html:43
+msgid "Manufacturing"
+msgstr "Confeccão"
+
+#: ams/templates/components/navbar.html:50
+msgid "Garments"
+msgstr "Peças"
+
+#: ams/templates/components/navbar.html:56
+msgid "Materials"
+msgstr "Marteriais"
+
+#: ams/templates/components/navbar.html:62
+msgid "Sales"
+msgstr "Vendas"
+
+#: clients/models.py:7
+msgid "Rua"
+msgstr "Rua"
+
+#: clients/models.py:8
+msgid "Numero"
+msgstr "Número"
+
+#: clients/models.py:9
+msgid "Bairro"
+msgstr "Bairro"
+
+#: clients/models.py:10
+msgid "Cidade"
+msgstr "Cidade"
+
+#: clients/models.py:21
+msgid "Nome"
+msgstr ""
+
+#: clients/models.py:22
+msgid "Telefone"
+msgstr ""
+
+#: clients/models.py:23
+>>>>>>> ee67262 (feat: add a base template to the hmtl files)
 msgid "Anotações"
 msgstr ""
 
 #: tasks/models.py:11 tasks/models.py:31
 msgid "Description"
+<<<<<<< HEAD
 msgstr ""
 
 #: tasks/models.py:13
 msgid "Base Value"
 msgstr ""
+=======
+msgstr "Descrição"
+
+#: tasks/models.py:13
+msgid "Base Value"
+msgstr "Valor Base"
+>>>>>>> ee67262 (feat: add a base template to the hmtl files)
 
 #: tasks/models.py:18 tasks/models.py:38
 msgid "The Value must be greater than 0"
@@ -70,10 +138,13 @@ msgstr ""
 msgid "Task Type"
 msgstr ""
 
+<<<<<<< HEAD
 #: tasks/models.py:23
 msgid "Task Types"
 msgstr ""
 
+=======
+>>>>>>> ee67262 (feat: add a base template to the hmtl files)
 #: tasks/models.py:33
 msgid "Value"
 msgstr ""
@@ -81,6 +152,7 @@ msgstr ""
 #: tasks/models.py:46
 msgid "Task"
 msgstr ""
+<<<<<<< HEAD
 
 #: tasks/models.py:47
 msgid "Tasks"
@@ -1309,3 +1381,5 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:236
 msgid "Connect, get help, or contribute"
 msgstr ""
+=======
+>>>>>>> ee67262 (feat: add a base template to the hmtl files)

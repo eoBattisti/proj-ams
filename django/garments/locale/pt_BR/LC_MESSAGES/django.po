@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-06 19:25+0000\n"
+"POT-Creation-Date: 2025-01-10 15:29-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,6 +70,14 @@ msgstr "O valor da peça deve ser maior que 0"
 msgid "Garment"
 msgstr "Peça"
 
-#: garments/models.py:52
+#: garments/models.py:52 garments/templates/garments/form.html:4
+#: garments/templates/garments/form.html:7
+#: garments/templates/garments/list.html:4
+#: garments/templates/garments/list.html:7
 msgid "Garments"
 msgstr "Peças"
+
+#: garments/templates/garments/form.html:12
+#: garments/templates/garments/list.html:12
+msgid "List"
+msgstr ""
