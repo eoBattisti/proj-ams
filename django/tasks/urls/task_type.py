@@ -1,13 +1,20 @@
 from django.urls import path
 
-from orders import views
+from tasks.views.task_type import (
+    TaskTypeListView,
+    TaskTypeDetailView,
+    TaskTypeCreateView,
+    TaskTypeUpdateView,
+    TaskTypeDeleteView,
+)
+
 
 app_name = "task_types"
 
 urlpatterns = [
-    path("", views.TaskTypeListView.as_view(), name="list"),
-    path("<uuid:pk>/", views.TaskTypeDetailView.as_view(), name="detail"),
-    path("create/", views.TaskTypeCreateView.as_view(), name="create"),
-    path("<uuid:pk>/update/", views.TaskUpdateView.as_view(), name="update"),
-    path("<uuid:pk>/delete/", views.TaskTypeDeleteView.as_view(), name="delete"),
+    path("", TaskTypeListView.as_view(), name="list"),
+    path("<uuid:pk>/", TaskTypeDetailView.as_view(), name="detail"),
+    path("create/", TaskTypeCreateView.as_view(), name="create"),
+    path("<uuid:pk>/update/", TaskTypeUpdateView.as_view(), name="update"),
+    path("<uuid:pk>/delete/", TaskTypeDeleteView.as_view(), name="delete"),
 ]
