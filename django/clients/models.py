@@ -8,10 +8,6 @@ class Address(models.Model):
     number = models.IntegerField(verbose_name=_("Numero"))
     neighborhood = models.CharField(verbose_name=_("Bairro"), max_length=100)
     city = models.CharField(verbose_name=_("Cidade"), max_length=100)
-    street = models.CharField(max_length=100)
-    number = models.IntegerField()
-    neighborhood = models.CharField(max_length=100)
-    city = models.CharField(max_length=100)
 
     def __str__(self):
         return f"{self.street}, {self.number}, {self.neighborhood} - {self.city}"
@@ -21,9 +17,6 @@ class Client(AbstractBaseModel):
     name = models.TextField(verbose_name=_("Nome"))
     phone = models.TextField(verbose_name=_("Telefone"))
     annotations = models.TextField(verbose_name=_("Anotações"))
-    name = models.TextField()
-    phone = models.TextField()
-    annotations = models.TextField()
 
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
 
