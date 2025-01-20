@@ -1,16 +1,50 @@
 {% extends 'layout.html' %}
 {% load i18n %}
 
-{% block title %}{% endblock title %}
-
+{% block title %}{% trans 'Clients'%}
+{% endblock title %}
 {% block page-title %}
-{% endblock page-title %}
-
-{% block breadcrumb %}
+<i class="bi bi-award mx-2"></i>
+{% trans 'Clients' %} {% endblock page-title %} {% block breadcrumb %}
 <ol class="breadcrumb">
-  <li class="breadcrumb-item active" aria-current="page"><a href=""></a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="{% url 'clients:list' %}">{% trans 'List' %}</a>
+  </li>
 </ol>
-{% endblock breadcrumb %}
+{% endblock breadcrumb %} {% block content %}
 
-{% block content %}
+
+<div class="container-fluid">
+  <div class="table-responsive" style="max-width: 70%; margin: 0 auto;">
+    <table class="table table-bordered table-striped table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="col-5">{% trans 'Name' %}</th>
+          <th scope="col" class="col-5">{% trans 'Phone' %}</th>
+          <th scope="col" class="col-2">{% trans 'Actions' %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for client in clients %}
+        <tr>
+          <td>{{ client.name }}</td>
+          <td>{{ client.phone }}</td>
+          <td class="col-4">
+            <a href="{% url 'clients:detail' client.pk %}" class="btn btn-info btn-sm">
+              {% trans 'View' %}
+            </a>
+            <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ client.pk }}">
+              {% trans 'Delete' %}
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="2">{% trans 'No clients available.' %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endblock content %}
