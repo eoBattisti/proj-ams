@@ -11,13 +11,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
-import environ
 from pathlib import Path
 
-from django.utils.translation import gettext_lazy as _
-
+import environ
 from ams.env import env
-
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,8 +54,8 @@ LOCAL_APPS = [
     "core",
     "orders",
     "garments",
-    "sales",
     "tasks",
+    "sales",
 ]
 
 INSTALLED_APPS = INTERNAL_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -151,7 +149,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "public_static")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
