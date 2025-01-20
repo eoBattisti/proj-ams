@@ -5,7 +5,7 @@ from tasks.views.task_type import (
     TaskTypeDeleteView,
     TaskTypeDetailView,
     TaskTypeListView,
-    TaskTypeUpdateView
+    TaskTypeUpdateView,
 )
 
 
