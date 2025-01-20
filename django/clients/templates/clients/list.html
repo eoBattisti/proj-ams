@@ -15,26 +15,30 @@
 
 
 <div class="container-fluid">
-  <div class="table-responsive" style="max-width: 70%; margin: 0 auto;">
-    <table class="table table-bordered table-striped table-hover">
+  <div class="table-responsive" style="max-width: 80%; margin: 0 auto;">
+    <table class="table table-sm">
       <thead class="thead-light">
         <tr>
-          <th scope="col" class="col-5">{% trans 'Name' %}</th>
-          <th scope="col" class="col-5">{% trans 'Phone' %}</th>
+          <th scope="col" class="col-1">{% trans 'City' %}</th>
+          <th scope="col" class="col-4">{% trans 'Name' %}</th>
+          <th scope="col" class="col-2">{% trans 'Phone' %}</th>
+          <th scope="col" class="col-3">{% trans 'Annotations' %}</th>
           <th scope="col" class="col-2">{% trans 'Actions' %}</th>
         </tr>
       </thead>
       <tbody>
         {% for client in clients %}
         <tr>
+          <td>{{ client.address.city }}</td>
           <td>{{ client.name }}</td>
           <td>{{ client.phone }}</td>
+          <td>{{ client.annotations }}</td>
           <td class="col-4">
             <a href="{% url 'clients:detail' client.pk %}" class="btn btn-info btn-sm">
-              {% trans 'View' %}
+              <i class="bi bi-pencil"></i>
             </a>
             <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ client.pk }}">
-              {% trans 'Delete' %}
+              <i class="bi bi-trash3-fill"></i> 
             </a>
           </td>
         </tr>
