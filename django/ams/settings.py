@@ -11,13 +11,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
-import environ
 from pathlib import Path
 
-from django.utils.translation import gettext_lazy as _
-
+import environ
 from ams.env import env
-
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,7 +56,6 @@ LOCAL_APPS = [
     "garments",
     "tasks",
     "sales",
-    "tasks",
 ]
 
 INSTALLED_APPS = INTERNAL_APPS + THIRD_PARTY_APPS + LOCAL_APPS
