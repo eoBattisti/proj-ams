@@ -6,12 +6,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from .models import Client
 from .forms import ClientForm
+import json
 
 
 class ClientListView(LoginRequiredMixin, ListView):
     model = Client
     template_name = "clients/list.html"
     context_object_name = "clients"
+
+    def get_queryset(self):
+        objects = list(Client.objects.values("name", "phone", "annotations"))
+        objects = json.dumps(objects)
+        print(objects)
+        return objects
 
 
 class ClientDetailView(LoginRequiredMixin, DetailView):
