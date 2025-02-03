@@ -1,25 +1,22 @@
-console.log(client_data);
 
-console.log(typeof client_data);
-
-const obj = JSON.parse(client_data);
-console.log(obj);
+const table = document.getElementById("tabela-clientes");
+var url = table.getAttribute("data-url");
+var nextButtonLabel = table.getAttribute("data-next-button-label");
+var previousButtonLabel = table.getAttribute("data-previous-button-label");
+var searchPlaceholder = table.getAttribute("data-search-placeholder");
 
 document.addEventListener("DOMContentLoaded", function () {
   new gridjs.Grid({
     columns: [
-      "name",
-      "Nome",
-      "Telefone",
-      "Anotações",
+      { id: "name", name: "Nome", sort: true }, 
+      { id: "phone", name: "Telefone", sort: false },
       {
+        id: "actions",
         name: "Ações",
+        sort: false,
+        width: "20%",
         formatter: (_, row) => {
-          const clientId = row.cells[0].client_data;
-          const clientName = row.cells[1].client_data;
-          const clientPhone = row.cells[2].client_data;
-          const clientAnnotations = row.cells[3].client_data;
-
+            console.log("Row:", row.cells);
           return gridjs.html(`
               <button
               class="btn btn-primary btn-sm"
@@ -32,21 +29,39 @@ document.addEventListener("DOMContentLoaded", function () {
               class="btn btn-danger btn-sm"
               data-bs-toggle="modal"
               data-bs-target="#deleteModal"
-              onclick="confirmDelete('${clientId}')">
+              onclick="confirmDelete()">
               Excluir
             </button>
             `);
         },
       },
     ],
-    data: [client_data],
-    pagination: 2,
+    server: {
+      url: url,
+      then: data => data.data.map(obj => [
+        obj.name,
+        obj.phone,
+      ]),
+      total: data => data.total
+    },
+    pagination: {
+      enabled: true,
+      limit: 10,
+      server: {
+        url: (prev, page, limit) => `${url}?page=${page}&pageSize=${limit}`,
+        total: data => data.total
+      }, 
+    },
     search: true,
     sort: true,
     language: {
       search: {
-        placeholder: "🔍 Search...",
+        placeholder: searchPlaceholder,
+      },
+      pagination: {
+        previous: previousButtonLabel,
+        next: nextButtonLabel,
       },
     },
-  }).render(document.getElementById("tabela-clientes"));
+  }).render(table);
 });

@@ -1,7 +1,11 @@
-{% extends 'layout.html' %} {% load i18n static %} {% block title %}{% trans
-'Clients' %}{% endblock %} {% block page-title %}
+{% extends 'layout.html' %} {% load i18n static %} 
+
+{% block title %}{% trans 'Clients' %}{% endblock title %} 
+
+{% block page-title %}
 <i class="bi bi-award mx-2"></i>
-{% trans 'Clients' %} {% endblock %}
+{% trans 'Clients' %} 
+{% endblock page-title %}
 
 <link
   href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
@@ -9,26 +13,32 @@
 />
 <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
 
+
 {% block breadcrumb %}
 <ol class="breadcrumb">
   <li class="breadcrumb-item active" aria-current="page">
     <a href="{% url 'clients:list' %}">{% trans 'List' %}</a>
   </li>
 </ol>
-{% endblock %} {% block content %}
+{% endblock breadcrumb %} 
 
-<div id="tabela-clientes"></div>
+{% block content %}
+
 <div class="d-flex justify-content-end">
-  <button type="button" class="btn btn-primary">Novo</button>
+  <button type="button" class="btn btn-success">
+    <i class="bi bi-plus"></i>
+    {% trans 'New Client' %}
+  </button>
 </div>
+<div id="tabela-clientes" data-url="{% url 'clients:json' %}"
+  data-next-button-label="{% trans 'Next' %}"
+  data-previous-button-label="{% trans 'Previous' %}"
+  data-search-placeholder="{% trans 'Search...' %}"></div>
 
-{% include "components/detail_modal.html" %} {% endblock %} {% block js-inline%}
-<script>
-  const client_data = "{{clients|safe}}";
-  console.log("jsss", client_data);
-</script>
+{% include "components/detail_modal.html" %}
+{% endblock content %} 
 
-{% endblock js-inline %} {% block js-external %}
+{% block js-external %}
 <script src="{% static 'js/detail_modal.js' %}"></script>
 <script src="{% static 'js/clients_list.js' %}"></script>
 {% endblock js-external %}
