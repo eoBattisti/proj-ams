@@ -36,12 +36,13 @@
 </div>
 
 <div class="d-flex justify-content-end">
-  <button type="button" class="btn btn-success">
+  <a href= "{% url 'clients:create' %}" class="btn btn-success">
     <i class="bi bi-plus"></i>
     {% trans 'New Client' %}
-  </button>
+  </a>
 </div>
-<div id="tabela-clientes" data-url="{% url 'clients:json' %}"
+
+<div id="tabela-clientes" class="shadow row rounded-2 p-2 mt-3" data-url="{% url 'clients:json' %}"
   data-next-button-label="{% trans 'Next' %}"
   data-previous-button-label="{% trans 'Previous' %}"
   data-search-placeholder="{% trans 'Search...' %}"></div>

@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.db.models import QuerySet
 from django.http import HttpResponse
 from django.urls import reverse
+from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic import DeleteView
 from django.views.generic import DetailView
@@ -67,17 +68,16 @@ class ClientDetailView(LoginRequiredMixin, DetailView):
 
 class ClientCreateView(LoginRequiredMixin, CreateView):
     model = Client
-    template_name = "clients/create.html"
+    template_name = "clients/form.html"
     form_class = ClientForm
-
-    def get_success_url(self):
-        return reverse("clients/list.html")
+    success_url = reverse_lazy("clients:list")
 
 
 class ClientUpdateView(LoginRequiredMixin, UpdateView):
     model = Client
-    template_name = "clients/update.html"
-    fields = ["name", "phone", "annotations"]
+    template_name = "clients/form.html"
+    form_class = ClientForm
+    success_url = reverse_lazy("clients:list")
 
 
 class ClientDeleteView(LoginRequiredMixin, DeleteView):

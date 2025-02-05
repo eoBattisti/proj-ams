@@ -1,6 +1,9 @@
-from django import forms
-from .models import Address, Client
 import re
+
+from django import forms
+
+from .models import Address
+from .models import Client
 
 
 class ClientForm(forms.ModelForm):
@@ -12,7 +15,25 @@ class ClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
-        fields = ["name", "phone", "annotations", "street", "number", "neighborhood", "city"]
+        fields = ["name", "phone", "annotations", "street", "number", "neighborhood", "city" ]
+        widgets = {
+                "name": forms.TextInput(attrs={"class": "form-control", "autofocus": True}),
+                "phone": forms.TextInput(attrs={"class": "form-control"}),
+                "annotations": forms.Textarea(attrs={"class": "form-control", "rows": 3}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(ClientForm, self).__init__(*args, **kwargs)
+        self.fields["number"].widget.attrs["class"] = "form-control"
+        self.fields["street"].widget.attrs["class"] = "form-control"
+        self.fields["neighborhood"].widget.attrs["class"] = "form-control"
+        self.fields["city"].widget.attrs["class"] = "form-control"
+
+        if kwargs.get("instance") is not None:
+            self.fields["number"].initial = self.instance.address.number
+            self.fields["street"].initial = self.instance.address.street
+            self.fields["neighborhood"].initial = self.instance.address.neighborhood
+            self.fields["city"].initial = self.instance.address.city
 
     def clean_name(self):
         name = self.cleaned_data.get("name")
@@ -63,8 +84,8 @@ class ClientForm(forms.ModelForm):
             city=self.cleaned_data["city"],
         )
 
-        client = super().save(commit=False)
         client.address = address
+        client = super().save(commit=False)
 
         if commit:
             client.save()
