@@ -20,6 +20,11 @@ from .models import Client
 class ClientListView(LoginRequiredMixin, TemplateView):
     template_name = "clients/list.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_clients"] = Client.objects.count()
+        return context
+
 
 class ClientListJsonView(LoginRequiredMixin, ListView):
     model = Client
