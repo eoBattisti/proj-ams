@@ -16,21 +16,23 @@ document.addEventListener("DOMContentLoaded", function () {
         sort: false,
         width: "20%",
         formatter: (_, row) => {
-            console.log("Row:", row.cells);
           return gridjs.html(`
+              <a
+              class="btn btn-secondary btn-md"
+              href="/clients/${row.cells[2].data}/">
+                <i class="bi bi-file-text"></i>
+              </a>
+              <a
+                class="btn btn-primary btn-md"
+              href="/clients/update/${row.cells[2].data}/">
+                <i class="bi bi-pencil"></i>
+              </a>
               <button
-              class="btn btn-primary btn-sm"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                onclick="mostrarDetalhes('')">
-                Detalhes
-              </button>
-              <button
-              class="btn btn-danger btn-sm"
+              class="btn btn-danger btn-md"
               data-bs-toggle="modal"
               data-bs-target="#deleteModal"
               onclick="confirmDelete()">
-              Excluir
+              <i class="bi bi-trash"></i>
             </button>
             `);
         },
@@ -41,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
       then: data => data.data.map(obj => [
         obj.name,
         obj.phone,
+        obj.id,
       ]),
       total: data => data.total
     },

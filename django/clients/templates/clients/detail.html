@@ -1,17 +1,55 @@
+{% extends 'layout.html' %} {% load i18n static %}
 
-{% extends 'layout.html' %}
-{% load i18n %}
-
-{% block title %}{% endblock title %}
+{% block title %}{% trans 'Clients' %} - {% trans 'Detail' %} {% endblock title %}
 
 {% block page-title %}
+<i class="bi bi-award mx-2"></i>
+{% trans 'Clients' %} - {% trans 'Detail' %}
 {% endblock page-title %}
 
 {% block breadcrumb %}
 <ol class="breadcrumb">
-  <li class="breadcrumb-item active" aria-current="page"><a href=""></a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="{% url 'clients:list' %}">{% trans 'List' %}</a>
+  </li>
+  <li class="breadcrumb-item">{% trans 'Detail' %}</li>
 </ol>
 {% endblock breadcrumb %}
 
 {% block content %}
+
+<div class="d-flex justify-content-end">
+  <a href= "{% url 'clients:list' %}" class="btn btn-secondary mx-2">
+    {% trans 'Back' %}
+  </a>
+  <a href= "{% url 'clients:update' client.id %}" class="btn btn-primary">
+    <i class="bi bi-pencil"></i>
+    {% trans 'Update' %}
+  </a>
+</div>
+
+
+<div class="container m-0">
+  <div class="row">
+    <div class="col-md-6 p-0">
+      <div class="col-md-12">
+        <div class="card shadow">
+            <div class="card-header bg-transparent border-secondary fs-5">{% trans 'Client' %}</div>
+          <div class="card-body">
+            <p class="card-text">
+              <b>{% trans 'Name' %}:</b> {{ client.name }}<br />
+              <b>{% trans 'Phone' %}:</b> {{ client.phone }}<br />
+              <b>{% trans 'Address' %}:</b> {{ client.address }}<br />
+            </p>
+            <p class="card-text">
+              <b>{% trans 'Annotations' %}:</b> {{ client.annotations }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock content %}
+

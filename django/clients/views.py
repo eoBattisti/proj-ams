@@ -43,6 +43,7 @@ class ClientListJsonView(LoginRequiredMixin, ListView):
 
         # Prepare data for Grid.js
         data = [{
+            'id': str(client.id),
             'name': client.name,
             'phone': client.phone,
             'annotations': client.annotations,
@@ -55,7 +56,7 @@ class ClientListJsonView(LoginRequiredMixin, ListView):
         }
 
         return HttpResponse(
-            json.dumps(response_data), 
+            json.dumps(response_data),
             content_type='application/json'
         )
 

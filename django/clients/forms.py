@@ -84,8 +84,9 @@ class ClientForm(forms.ModelForm):
             city=self.cleaned_data["city"],
         )
 
-        client.address = address
         client = super().save(commit=False)
+
+        client.address = address
 
         if commit:
             client.save()
