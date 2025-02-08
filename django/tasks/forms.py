@@ -1,8 +1,10 @@
 from decimal import Decimal
 
-from django.forms import DecimalField, ModelForm
-
-from tasks.models import Task, TaskType
+from django import forms
+from django.forms import DecimalField
+from django.forms import ModelForm
+from tasks.models import Task
+from tasks.models import TaskType
 
 
 class TaskForm(ModelForm):
@@ -31,8 +33,11 @@ class TaskForm(ModelForm):
 
 
 class TaskTypeForm(ModelForm):
-    base_value = DecimalField(min_value=0, max_digits=10, decimal_places=2, initial=0)
 
     class Meta:
         model = TaskType
         fields = ["description", "base_value"]
+        widgets = {
+            "description": forms.TextInput(attrs={"class": "form-control", "autofocus": True}),
+            "base_value": forms.NumberInput(attrs={"class": "form-control", "value": 0, "min": 0, "step": 1}),
+        }
