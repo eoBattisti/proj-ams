@@ -8,11 +8,15 @@ from tasks.models import TaskType
 
 
 class TaskForm(ModelForm):
-    value = DecimalField(min_value=0, max_digits=10, decimal_places=2, initial=0)
 
     class Meta:
         model = Task
         fields = ["description", "value", "task_type"]
+        widgets = {
+            "description": forms.TextInput(attrs={"class": "form-control", "autofocus": True}),
+            "value": forms.NumberInput(attrs={"class": "form-control", "value": 0, "min": 0, "step": 1}),
+            "task_type": forms.Select(attrs={"class": "form-select"}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
