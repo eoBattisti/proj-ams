@@ -6,31 +6,35 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('clients', '0001_initial'),
-        ('tasks', '0001_initial'),
+        ("clients", "0001_initial"),
+        ("tasks", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Order',
+            name="Order",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated At')),
-                ('discount', models.FloatField(blank=True, null=True, verbose_name='Discount')),
-                ('completed', models.BooleanField(default=False, verbose_name='Completed')),
-                ('due_date', models.DateField(blank=True, null=True, verbose_name='Due Date')),
-                ('order_date', models.DateField(blank=True, null=True, verbose_name='Order Date')),
-                ('client', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='clients.client', verbose_name='Client')),
-                ('tasks', models.ManyToManyField(to='tasks.task', verbose_name='Services')),
+                ("id", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ("created_at", models.DateTimeField(auto_now_add=True, verbose_name="Created At")),
+                ("updated_at", models.DateTimeField(auto_now=True, verbose_name="Updated At")),
+                ("discount", models.FloatField(blank=True, null=True, verbose_name="Discount")),
+                ("completed", models.BooleanField(default=False, verbose_name="Completed")),
+                ("due_date", models.DateField(blank=True, null=True, verbose_name="Due Date")),
+                ("order_date", models.DateField(blank=True, null=True, verbose_name="Order Date")),
+                (
+                    "client",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="clients.client", verbose_name="Client"
+                    ),
+                ),
+                ("tasks", models.ManyToManyField(to="tasks.task", verbose_name="Services")),
             ],
             options={
-                'verbose_name': 'Order',
-                'verbose_name_plural': 'Orders',
+                "verbose_name": "Order",
+                "verbose_name_plural": "Orders",
             },
         ),
     ]

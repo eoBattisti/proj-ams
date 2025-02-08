@@ -2,21 +2,18 @@ from decimal import Decimal
 
 from django import forms
 from django.forms import ModelForm
-from django.forms.formsets import BaseFormSet
 from django.forms.models import BaseModelFormSet
 from tasks.models import Task
 from tasks.models import TaskType
 
 
 class BaseTaskFormSet(BaseModelFormSet):
-
     def __init__(self, *args, **kwargs):
-        super().__init__( *args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.queryset = kwargs.get("queryset") if kwargs.get("queryset") else Task.objects.none()
 
 
 class TaskForm(ModelForm):
-
     class Meta:
         model = Task
         fields = ["description", "value", "task_type"]
@@ -45,7 +42,6 @@ class TaskForm(ModelForm):
 
 
 class TaskTypeForm(ModelForm):
-
     class Meta:
         model = TaskType
         fields = ["description", "base_value"]
