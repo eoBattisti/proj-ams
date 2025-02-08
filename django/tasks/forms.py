@@ -1,14 +1,12 @@
 from decimal import Decimal
 
 from django import forms
-from django.forms import DecimalField
 from django.forms import ModelForm
 from tasks.models import Task
 from tasks.models import TaskType
 
 
 class TaskForm(ModelForm):
-
     class Meta:
         model = Task
         fields = ["description", "value", "task_type"]
@@ -37,7 +35,6 @@ class TaskForm(ModelForm):
 
 
 class TaskTypeForm(ModelForm):
-
     class Meta:
         model = TaskType
         fields = ["description", "base_value"]

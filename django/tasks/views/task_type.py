@@ -25,6 +25,7 @@ class TaskTypeListView(LoginRequiredMixin, ListView):
         context["total_objects"] = TaskType.objects.count()
         return context
 
+
 class TaskTypeListJsonView(LoginRequiredMixin, ListView):
     model = TaskType
 
@@ -42,7 +43,7 @@ class TaskTypeListJsonView(LoginRequiredMixin, ListView):
         # Prepare data for Grid.js
         data = [
             {
-                "description":obj.description,
+                "description": obj.description,
                 "value": float(obj.base_value),
                 "id": str(obj.id),
             }
@@ -55,7 +56,6 @@ class TaskTypeListJsonView(LoginRequiredMixin, ListView):
         }
 
         return HttpResponse(json.dumps(response_data), content_type="application/json")
-
 
 
 class TaskTypeDetailView(LoginRequiredMixin, DetailView):

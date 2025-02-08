@@ -25,11 +25,12 @@ class TaskListView(LoginRequiredMixin, ListView):
         context["total_objects"] = Task.objects.count()
         return context
 
+
 class TaskListJsonView(LoginRequiredMixin, ListView):
     model = Task
 
     def get_queryset(self):
-        objects: QuerySet[Task,Task] = super().get_queryset()
+        objects: QuerySet[Task, Task] = super().get_queryset()
         return objects
 
     def render_to_response(self, context: dict[str, Any], **response_kwargs: Any) -> HttpResponse:
@@ -42,7 +43,7 @@ class TaskListJsonView(LoginRequiredMixin, ListView):
         # Prepare data for Grid.js
         data = [
             {
-                "description":obj.description,
+                "description": obj.description,
                 "value": float(obj.value),
                 "task_type": str(obj.task_type),
                 "id": str(obj.id),
@@ -56,7 +57,6 @@ class TaskListJsonView(LoginRequiredMixin, ListView):
         }
 
         return HttpResponse(json.dumps(response_data), content_type="application/json")
-
 
 
 class TaskDetailView(LoginRequiredMixin, DetailView):

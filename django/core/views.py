@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.http.response import HttpResponseRedirect
 from django.http.response import JsonResponse
-from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
@@ -36,7 +35,6 @@ class GenericDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy(f"{self.model._meta.app_label}:list")
-
 
     def get(self, request, *args, **kwargs):
         self.object = self.model.objects.get(pk=kwargs["pk"])
