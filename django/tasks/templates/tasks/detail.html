@@ -1,16 +1,58 @@
+{% extends 'layout.html' %} {% load i18n static %}
 
-{% load i18n %}
-
-{% block title %}{% endblock title %}
+{% block title %}{% trans 'Tasks' %} - {% trans 'Detail' %} {% endblock title %}
 
 {% block page-title %}
+<i class="bi bi-award mx-2"></i>
+{% trans 'Tasks' %} - {% trans 'Detail' %}
 {% endblock page-title %}
 
 {% block breadcrumb %}
 <ol class="breadcrumb">
-  <li class="breadcrumb-item active" aria-current="page"><a href=""></a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="{% url 'tasks:list' %}">{% trans 'List' %}</a>
+  </li>
+  <li class="breadcrumb-item">{% trans 'Detail' %}</li>
 </ol>
 {% endblock breadcrumb %}
 
 {% block content %}
+
+<div class="d-flex justify-content-end">
+  <a href= "{% url 'tasks:list' %}" class="btn btn-secondary mx-2">
+    {% trans 'Back' %}
+  </a>
+  <a href= "{% url 'tasks:update' task.id %}" class="btn btn-primary">
+    <i class="bi bi-pencil"></i>
+    {% trans 'Update' %}
+  </a>
+</div>
+
+
+<div class="container m-0">
+  <div class="row">
+    <div class="col-md-6 p-0">
+      <div class="col-md-12">
+        <div class="card shadow">
+            <div class="card-header bg-transparent border-secondary fs-5">{% trans 'Task Type' %}</div>
+          <div class="card-body">
+            <p class="card-text">
+            <b>{% trans 'Description' %}:</b> {{ task.description }}<br/>
+            </p>
+            <p class="card-text">
+              <b>{% trans 'Value' %}:</b> {{ task.value }}<br />
+            </p>
+            <p class="card-text">
+              <b>{% trans 'Value' %}:</b> {{ task.task_type }}<br />
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock content %}
+
+
+

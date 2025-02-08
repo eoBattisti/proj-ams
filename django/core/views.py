@@ -22,6 +22,9 @@ class GenericDeleteView(LoginRequiredMixin, DeleteView):
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
+        content_type = ContentType.objects.filter(
+            app_label=kwargs["app_label"],
+        )
 
         content_type = ContentType.objects.get(
             app_label=kwargs["app_label"],
@@ -45,14 +48,10 @@ class GenericDeleteView(LoginRequiredMixin, DeleteView):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        print("Object: ", self.object)
         success_url = self.get_success_url()
         self.object.delete()
-        print("Success url: ", success_url)
-        print("Request: ", request)
 
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
-            print("XMLHttpRequest")
             return JsonResponse({"success": True, "redirect_url": success_url})
 
         return HttpResponseRedirect(success_url)
