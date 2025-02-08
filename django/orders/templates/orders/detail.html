@@ -1,16 +1,78 @@
-{% extends 'layout.html' %}
-{% load i18n %}
+{% extends 'layout.html' %} {% load i18n static %}
 
-{% block title %}{% endblock title %}
+{% block title %}{% trans 'Orders' %} - {% trans 'Detail' %} {% endblock title %}
 
 {% block page-title %}
+<i class="bi bi-award mx-2"></i>
+{% trans 'Orders' %} - {% trans 'Detail' %}
 {% endblock page-title %}
 
 {% block breadcrumb %}
 <ol class="breadcrumb">
-  <li class="breadcrumb-item active" aria-current="page"><a href=""></a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="{% url 'orders:list' %}">{% trans 'List' %}</a>
+  </li>
+  <li class="breadcrumb-item">{% trans 'Detail' %}</li>
 </ol>
 {% endblock breadcrumb %}
 
 {% block content %}
+
+<div class="d-flex justify-content-end">
+  <a href= "{% url 'orders:list' %}" class="btn btn-secondary mx-2">
+    {% trans 'Back' %}
+  </a>
+  <a href= "{% url 'orders:update' order.id %}" class="btn btn-primary">
+    <i class="bi bi-pencil"></i>
+    {% trans 'Update' %}
+  </a>
+</div>
+
+<div class="container m-0">
+  <div class="row">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-transparent border-secondary fs-5">{% trans 'Order' %}</div>
+          <div class="card-body">
+            <p class="card-text">
+            <b>{% trans 'Client' %}:</b> {{ order.client.name }}<br/>
+            </p>
+            <p class="card-text">
+              <b>{% trans 'Order Date' %}:</b> {{ order.order_date }}<br />
+            </p>
+            <p class="card-text">
+              <b>{% trans 'Due Date' %}:</b> {{ order.due_date }}<br />
+            </p>
+            <p class="card-text">
+              <b>{% trans 'Total' %}:</b> R$ {{ order.total }}<br />
+            </p>
+            <p class="card-text">
+              <b>{% trans 'Completed' %}:</b> {{ order.completed|yesno }}<br />
+            </p>
+            <p class="card-text">
+              <b>{% trans 'Discount' %}:</b> {{ order.discount }}%<br />
+            </p>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-header bg-transparent border-secondary fs-5">{% trans 'Tasks' %}</div>
+          <div class="card-body">
+            {% for task in order.tasks.all %}
+              <p class="card-text"><b>{% trans 'Description' %}:</b> {{ task.description }} </p>
+              <p class="card-text"><b>{% trans 'Value' %}:</b> R$ {{ task.value }} </p>
+              <hr>
+            {% endfor %}
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
 {% endblock content %}
+
+
+
+

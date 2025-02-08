@@ -13,7 +13,6 @@ urlpatterns = [
     path("garments/", include("garments.urls.garments")),
     path("materials/", include("garments.urls.materials")),
     path("orders/", include("orders.urls.orders")),
-    path("order-types/", include("orders.urls.order_types")),
     path("tasks/", include("tasks.urls.tasks")),
     path("task-types/", include("tasks.urls.task_type")),
     path("sales/", include("sales.urls")),

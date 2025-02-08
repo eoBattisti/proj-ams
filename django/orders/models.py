@@ -1,50 +1,23 @@
-from django.db import models
-
-from django.core.validators import MinValueValidator
-from django.utils.translation import gettext_lazy as _
-
 from core.models import AbstractBaseModel
-
-
-class OrderType(AbstractBaseModel):
-    description = models.CharField(verbose_name=_("Description"), max_length=255, null=False, blank=False)
-    base_value = models.DecimalField(
-        verbose_name=_("Value"),
-        max_digits=10,
-        decimal_places=2,
-        null=False,
-        blank=False,
-        validators=[MinValueValidator(limit_value=0, message=_("The Base Value must be greater than 0"))],
-    )
-
-    class Meta:
-        verbose_name = _("Order Type")
-        verbose_name_plural = _("Order Types")
-        ordering = ("description",)
-
-    def __str__(self):
-        return f"{self.description} - {self.base_value}"
+from django.db import models
+from django.db.models.query import QuerySet
+from django.utils.translation import gettext_lazy as _
+from tasks.models import Task
 
 
 class Order(AbstractBaseModel):
-    description = models.CharField(verbose_name=_("Description"), max_length=255, null=False, blank=False)
-    value = models.DecimalField(
-        verbose_name=_("Value"),
-        max_digits=10,
-        decimal_places=2,
-        null=False,
-        blank=True,
-        validators=[MinValueValidator(limit_value=0, message=_("The Value must be greater than 0"))],
-    )
-
-    order_type = models.ForeignKey(
-        verbose_name=_("Order Type"), to=OrderType, on_delete=models.CASCADE, related_name="orders"
-    )
+    client = models.ForeignKey(verbose_name=_("Client"), to="clients.Client", on_delete=models.CASCADE)
+    discount = models.FloatField(verbose_name=_("Discount"), null=True, blank=True)
+    completed = models.BooleanField(verbose_name=_("Completed"), default=False)
+    tasks = models.ManyToManyField(verbose_name=_("Services"), to="tasks.Task")
+    due_date = models.DateField(verbose_name=_("Due Date"), null=True, blank=True)
+    order_date = models.DateField(verbose_name=_("Order Date"), null=True, blank=True)
 
     class Meta:
         verbose_name = _("Order")
         verbose_name_plural = _("Orders")
-        ordering = ("description",)
 
-    def __str__(self):
-        return f"{self.description} - {self.value}"
+    @property
+    def total(self):
+        tasks: QuerySet[Task, Task] = self.tasks.all()
+        return sum([task.value for task in tasks])

@@ -1,0 +1,77 @@
+const table = document.getElementById("table");
+var url = table.getAttribute("data-url");
+var nextButtonLabel = table.getAttribute("data-next-button-label");
+var previousButtonLabel = table.getAttribute("data-previous-button-label");
+var searchPlaceholder = table.getAttribute("data-search-placeholder");
+var appName = table.getAttribute("data-app-name");
+var modelName = table.getAttribute("data-model-name");
+
+document.addEventListener("DOMContentLoaded", function () {
+  new gridjs.Grid({
+    columns: [
+      { id: "client", name: "Cliente", sort: true }, 
+      { id: "order_date", name: "Data do Pedido", sort: true },
+      { id: "due_date", name: "Data de Entrega", sort: true },
+      { id: "total", name: "Total", sort: true },
+      { id: "completed", name: "Concluido", sort: true },
+      { id: "discount", name: "Desconto", sort: true },
+      {
+        id: "actions",
+        name: "Ações",
+        sort: false,
+        width: "20%",
+        formatter: (_, row) => {
+          return gridjs.html(`
+              <a
+              class="btn btn-secondary btn-md"
+              href="/orders/${row.cells[6].data}/">
+                <i class="bi bi-file-text"></i>
+              </a>
+              <a
+                class="btn btn-primary btn-md"
+              href="/orders/${row.cells[6].data}/update/">
+                <i class="bi bi-pencil"></i>
+              </a>
+              <button
+              class="btn btn-danger btn-md"
+              onclick="showDeleteModal('/delete/${appName}/${modelName}/${row.cells[6].data}/')">
+              <i class="bi bi-trash"></i>
+            </button>
+            `);
+        },
+      },
+    ],
+    server: {
+      url: url,
+      then: data => data.data.map(obj => [
+        obj.client,
+        obj.order_date,
+        obj.due_date,
+        obj.total,
+        obj.completed,
+        obj.discount,
+        obj.id,
+      ]),
+      total: data => data.total
+    },
+    pagination: {
+      enabled: true,
+      limit: 10,
+      server: {
+        url: (prev, page, limit) => `${url}?page=${page}&pageSize=${limit}`,
+        total: data => data.total
+      }, 
+    },
+    search: true,
+    sort: true,
+    language: {
+      search: {
+        placeholder: searchPlaceholder,
+      },
+      pagination: {
+        previous: previousButtonLabel,
+        next: nextButtonLabel,
+      },
+    },
+  }).render(table);
+});

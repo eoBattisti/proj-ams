@@ -1,15 +1,135 @@
-{% load i18n %}
+{% extends 'layout.html' %} {% load i18n static %}
 
-{% block title %}{% endblock title %}
+{% block title %}{% trans 'Orders' %} - {% trans 'Form' %} {% endblock title %}
 
 {% block page-title %}
+<i class="bi bi-award mx-2"></i>
+{% trans 'Orders' %} - {% trans 'Form' %}
 {% endblock page-title %}
 
 {% block breadcrumb %}
 <ol class="breadcrumb">
-  <li class="breadcrumb-item active" aria-current="page"><a href=""></a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="{% url 'orders:list' %}">{% trans 'List' %}</a>
+  </li>
+  <li class="breadcrumb-item">{% trans 'Form' %}</li>
 </ol>
 {% endblock breadcrumb %}
 
 {% block content %}
+
+<div class="container py-3">
+<form method="post" novalidate>
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="card shadow">
+        <div class="card-body">
+
+            <div class="row">
+            {% for field in form %}
+            <div class="mb-3 col-md-6">
+
+              {% if field.field.widget.input_type == 'checkbox' %}
+              <div class="form-check">
+                <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                <input class="form-check-input" type="checkbox" value="" id="{{ field.id_for_label }}" />
+              </div>
+              {% else %}
+              <label for="{{ field.id_for_label }}" class="form-label">
+                {{ field.label }}
+              </label>
+                {{ field }}
+              {% endif %}
+
+              {% if field.errors %}
+              {% for error in field.errors %}
+              <div class="invalid-feedback d-block">
+                {{ error }}
+              </div>
+              {% endfor %}
+              {% endif %}
+
+              {% if field.help_text %}
+              <small class="form-text text-muted">
+                {{ field.help_text }}
+              </small>
+              {% endif %}
+            </div>
+            {% endfor %}
+
+            <div class="d-flex mt-4 justify-content-end">
+              <a href="{% url 'orders:list' %}" class="btn btn-secondary mx-2">
+                {% trans 'Cancel' %}
+              </a>
+              <button type="submit" class="btn btn-success mx-2">
+                {% trans 'Save' %}
+              </button>
+            </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="card-title">Tasks</h5>
+        </div>
+        <div class="card-body">
+            {# Important: Include the management form here #}
+            {{ task_formset.management_form }}
+            <div id="task-forms">
+                {% for form in task_formset.forms %}
+                    <div class="task-form mb-3">
+                        {{ form.as_p }}
+                        {% if task_formset.can_delete %}
+                            <div class="form-check">
+                                {{ form.DELETE }}
+                                <label class="form-check-label">Delete this task</label>
+                            </div>
+                        {% endif %}
+                        <hr>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="button" id="add-task" class="btn btn-secondary">Add Another Task</button>
+        </div>
+    </div>
+
+    </div>
+  </div>
+  </form>
+</div>
+
+<script>
+document.getElementById('add-task').addEventListener('click', function() {
+    const forms = document.getElementsByClassName('task-form');
+    const formNum = forms.length;
+    const totalForms = document.querySelector('#id_tasks-TOTAL_FORMS');
+    
+    const newForm = forms[0].cloneNode(true);
+    
+    // Clear the values in the cloned form
+    newForm.querySelectorAll('input:not([type=hidden])').forEach(input => {
+        input.value = '';
+    });
+    newForm.querySelectorAll('select').forEach(select => {
+        select.selectedIndex = 0;
+    });
+    
+    // Update form index
+    newForm.innerHTML = newForm.innerHTML.replace(
+        /tasks-(\d+)-/g,
+        function(match, p1) {
+            return `tasks-${formNum}-`;
+        }
+    );
+    
+    document.getElementById('task-forms').appendChild(newForm);
+    totalForms.value = formNum + 1;
+});
+</script>
 {% endblock content %}
+
+
+
