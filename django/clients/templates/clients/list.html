@@ -45,9 +45,11 @@
 <div id="tabela-clientes" class="shadow row rounded-2 p-2 mt-3" data-url="{% url 'clients:json' %}"
   data-next-button-label="{% trans 'Next' %}"
   data-previous-button-label="{% trans 'Previous' %}"
-  data-search-placeholder="{% trans 'Search...' %}"></div>
+  data-search-placeholder="{% trans 'Search...' %}"
+  data-app-name="clients"
+  data-model-name="client"></div>
 
-{% include "components/detail_modal.html" %}
+<div id="modal-container"></div>
 {% endblock content %} 
 
 {% block js-external %}

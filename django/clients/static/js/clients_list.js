@@ -4,6 +4,8 @@ var url = table.getAttribute("data-url");
 var nextButtonLabel = table.getAttribute("data-next-button-label");
 var previousButtonLabel = table.getAttribute("data-previous-button-label");
 var searchPlaceholder = table.getAttribute("data-search-placeholder");
+var appName = table.getAttribute("data-app-name");
+var modelName = table.getAttribute("data-model-name");
 
 document.addEventListener("DOMContentLoaded", function () {
   new gridjs.Grid({
@@ -29,9 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
               </a>
               <button
               class="btn btn-danger btn-md"
-              data-bs-toggle="modal"
-              data-bs-target="#deleteModal"
-              onclick="confirmDelete()">
+              onclick="showDeleteModal('/delete/${appName}/${modelName}/${row.cells[2].data}/')">
               <i class="bi bi-trash"></i>
             </button>
             `);
