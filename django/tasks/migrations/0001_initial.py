@@ -7,42 +7,74 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='TaskType',
+            name="TaskType",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated At')),
-                ('description', models.CharField(max_length=255, verbose_name='Description')),
-                ('base_value', models.DecimalField(blank=True, decimal_places=2, max_digits=10, validators=[django.core.validators.MinValueValidator(limit_value=0, message='The Value must be greater than 0')], verbose_name='Base Value')),
+                ("id", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ("created_at", models.DateTimeField(auto_now_add=True, verbose_name="Created At")),
+                ("updated_at", models.DateTimeField(auto_now=True, verbose_name="Updated At")),
+                ("description", models.CharField(max_length=255, verbose_name="Description")),
+                (
+                    "base_value",
+                    models.DecimalField(
+                        blank=True,
+                        decimal_places=2,
+                        max_digits=10,
+                        validators=[
+                            django.core.validators.MinValueValidator(
+                                limit_value=0, message="The Value must be greater than 0"
+                            )
+                        ],
+                        verbose_name="Base Value",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Task Type',
-                'verbose_name_plural': 'Task Types',
-                'ordering': ('description',),
+                "verbose_name": "Task Type",
+                "verbose_name_plural": "Task Types",
+                "ordering": ("description",),
             },
         ),
         migrations.CreateModel(
-            name='Task',
+            name="Task",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated At')),
-                ('description', models.CharField(max_length=255, verbose_name='Description')),
-                ('value', models.DecimalField(blank=True, decimal_places=2, max_digits=10, validators=[django.core.validators.MinValueValidator(limit_value=0, message='The Value must be greater than 0')], verbose_name='Value')),
-                ('task_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Task_Type', to='tasks.tasktype', verbose_name='Task Type')),
+                ("id", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ("created_at", models.DateTimeField(auto_now_add=True, verbose_name="Created At")),
+                ("updated_at", models.DateTimeField(auto_now=True, verbose_name="Updated At")),
+                ("description", models.CharField(max_length=255, verbose_name="Description")),
+                (
+                    "value",
+                    models.DecimalField(
+                        blank=True,
+                        decimal_places=2,
+                        max_digits=10,
+                        validators=[
+                            django.core.validators.MinValueValidator(
+                                limit_value=0, message="The Value must be greater than 0"
+                            )
+                        ],
+                        verbose_name="Value",
+                    ),
+                ),
+                (
+                    "task_type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="Task_Type",
+                        to="tasks.tasktype",
+                        verbose_name="Task Type",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Task',
-                'verbose_name_plural': 'Tasks',
-                'ordering': ('description',),
+                "verbose_name": "Task",
+                "verbose_name_plural": "Tasks",
+                "ordering": ("description",),
             },
         ),
     ]

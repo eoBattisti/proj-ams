@@ -15,11 +15,11 @@ class ClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
-        fields = ["name", "phone", "annotations", "street", "number", "neighborhood", "city" ]
+        fields = ["name", "phone", "annotations", "street", "number", "neighborhood", "city"]
         widgets = {
-                "name": forms.TextInput(attrs={"class": "form-control", "autofocus": True}),
-                "phone": forms.TextInput(attrs={"class": "form-control"}),
-                "annotations": forms.Textarea(attrs={"class": "form-control", "rows": 3}),
+            "name": forms.TextInput(attrs={"class": "form-control", "autofocus": True}),
+            "phone": forms.TextInput(attrs={"class": "form-control"}),
+            "annotations": forms.Textarea(attrs={"class": "form-control", "rows": 3}),
         }
 
     def __init__(self, *args, **kwargs):

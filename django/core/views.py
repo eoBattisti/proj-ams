@@ -37,13 +37,9 @@ class GenericDeleteView(LoginRequiredMixin, DeleteView):
         self.object = self.model.objects.get(pk=kwargs["pk"])
         context = self.get_context_data(object=self.object, app_label=kwargs["app_label"], model=kwargs["model"])
 
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            html_form = render_to_string(
-                self.template_name,
-                context,
-                request=request
-            )
-            return JsonResponse({'html_form': html_form})
+        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+            html_form = render_to_string(self.template_name, context, request=request)
+            return JsonResponse({"html_form": html_form})
 
         return self.render_to_response(context)
 
@@ -55,11 +51,8 @@ class GenericDeleteView(LoginRequiredMixin, DeleteView):
         print("Success url: ", success_url)
         print("Request: ", request)
 
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             print("XMLHttpRequest")
-            return JsonResponse({
-                'success': True,
-                'redirect_url': success_url
-            })
+            return JsonResponse({"success": True, "redirect_url": success_url})
 
         return HttpResponseRedirect(success_url)

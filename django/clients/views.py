@@ -35,30 +35,30 @@ class ClientListJsonView(LoginRequiredMixin, ListView):
         return objects
 
     def render_to_response(self, context: dict[str, Any], **response_kwargs: Any) -> HttpResponse:
-        page_number = self.request.GET.get('page', 1)
-        page_size = self.request.GET.get('pageSize', 10)
+        page_number = self.request.GET.get("page", 1)
+        page_size = self.request.GET.get("pageSize", 10)
 
         paginator = Paginator(self.get_queryset(), page_size)
         page_obj = paginator.get_page(page_number)
 
         # Prepare data for Grid.js
-        data = [{
-            'id': str(client.id),
-            'name': client.name,
-            'phone': client.phone,
-            'annotations': client.annotations,
-            'address': str(client.address),
-        } for client in page_obj]
+        data = [
+            {
+                "id": str(client.id),
+                "name": client.name,
+                "phone": client.phone,
+                "annotations": client.annotations,
+                "address": str(client.address),
+            }
+            for client in page_obj
+        ]
 
         response_data = {
-            'data': data,
-            'total': paginator.count,
+            "data": data,
+            "total": paginator.count,
         }
 
-        return HttpResponse(
-            json.dumps(response_data),
-            content_type='application/json'
-        )
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
 class ClientDetailView(LoginRequiredMixin, DetailView):

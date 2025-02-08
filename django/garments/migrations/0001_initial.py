@@ -6,44 +6,74 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Material',
+            name="Material",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated At')),
-                ('description', models.TextField(verbose_name='Description')),
-                ('value', models.DecimalField(decimal_places=2, max_digits=10, validators=[django.core.validators.MinValueValidator(limit_value=0, message='Material value must be greater than 0')], verbose_name='Value')),
+                ("id", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ("created_at", models.DateTimeField(auto_now_add=True, verbose_name="Created At")),
+                ("updated_at", models.DateTimeField(auto_now=True, verbose_name="Updated At")),
+                ("description", models.TextField(verbose_name="Description")),
+                (
+                    "value",
+                    models.DecimalField(
+                        decimal_places=2,
+                        max_digits=10,
+                        validators=[
+                            django.core.validators.MinValueValidator(
+                                limit_value=0, message="Material value must be greater than 0"
+                            )
+                        ],
+                        verbose_name="Value",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Material',
-                'verbose_name_plural': 'Materials',
-                'ordering': ('value',),
+                "verbose_name": "Material",
+                "verbose_name_plural": "Materials",
+                "ordering": ("value",),
             },
         ),
         migrations.CreateModel(
-            name='Garment',
+            name="Garment",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated At')),
-                ('name', models.CharField(max_length=255, verbose_name='Name')),
-                ('size', models.PositiveSmallIntegerField(choices=[(1, 'Small'), (2, 'Medium'), (3, 'Large'), (4, 'Extra Large')], verbose_name='Size')),
-                ('value', models.DecimalField(decimal_places=2, max_digits=10, validators=[django.core.validators.MinValueValidator(limit_value=0, message='Garment value must be greater than 0')], verbose_name='Value')),
-                ('description', models.TextField(verbose_name='Description')),
-                ('materials', models.ManyToManyField(related_name='garments', to='garments.material', verbose_name='Materials')),
+                ("id", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ("created_at", models.DateTimeField(auto_now_add=True, verbose_name="Created At")),
+                ("updated_at", models.DateTimeField(auto_now=True, verbose_name="Updated At")),
+                ("name", models.CharField(max_length=255, verbose_name="Name")),
+                (
+                    "size",
+                    models.PositiveSmallIntegerField(
+                        choices=[(1, "Small"), (2, "Medium"), (3, "Large"), (4, "Extra Large")], verbose_name="Size"
+                    ),
+                ),
+                (
+                    "value",
+                    models.DecimalField(
+                        decimal_places=2,
+                        max_digits=10,
+                        validators=[
+                            django.core.validators.MinValueValidator(
+                                limit_value=0, message="Garment value must be greater than 0"
+                            )
+                        ],
+                        verbose_name="Value",
+                    ),
+                ),
+                ("description", models.TextField(verbose_name="Description")),
+                (
+                    "materials",
+                    models.ManyToManyField(related_name="garments", to="garments.material", verbose_name="Materials"),
+                ),
             ],
             options={
-                'verbose_name': 'Garment',
-                'verbose_name_plural': 'Garments',
-                'ordering': ('name',),
+                "verbose_name": "Garment",
+                "verbose_name_plural": "Garments",
+                "ordering": ("name",),
             },
         ),
     ]
