@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-10 15:29-0300\n"
+"POT-Creation-Date: 2025-02-08 13:54-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,37 +18,81 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: orders/models.py:10 orders/models.py:30
-msgid "Description"
-msgstr "Descrição"
+#: orders/models.py:9
+msgid "Client"
+msgstr ""
 
-#: orders/models.py:12 orders/models.py:32
-msgid "Value"
-msgstr "Valor"
+#: orders/models.py:10
+msgid "Discount"
+msgstr ""
 
-#: orders/models.py:17
-msgid "The Base Value must be greater than 0"
-msgstr "O Valor Base deve ser maior que 0"
+#: orders/models.py:11
+msgid "Completed"
+msgstr ""
 
-#: orders/models.py:21 orders/models.py:41
-msgid "Order Type"
+#: orders/models.py:12
+msgid "Services"
+msgstr ""
+
+#: orders/models.py:13
+msgid "Due Date"
+msgstr ""
+
+#: orders/models.py:14
+#, fuzzy
+#| msgid "Order Type"
+msgid "Order Date"
 msgstr "Tipo de Serviço"
 
-#: orders/models.py:22
-msgid "Order Types"
-msgstr "Tipos de Serviços"
-
-#: orders/models.py:37
-msgid "The Value must be greater than 0"
-msgstr "O Valor deve ser maior que 0"
-
-#: orders/models.py:45
+#: orders/models.py:17
 msgid "Order"
 msgstr "Serviço"
 
-#: orders/models.py:46
+#: orders/models.py:18 orders/templates/orders/list.html:3
+#: orders/templates/orders/list.html:7
 msgid "Orders"
 msgstr "Serviços"
+
+#: orders/templates/orders/list.html:20
+msgid "List"
+msgstr ""
+
+#: orders/templates/orders/list.html:30
+msgid "Total Tasks"
+msgstr ""
+
+#: orders/templates/orders/list.html:41
+#, fuzzy
+#| msgid "Order"
+msgid "New Order"
+msgstr "Serviço"
+
+#: orders/templates/orders/list.html:46
+msgid "Next"
+msgstr ""
+
+#: orders/templates/orders/list.html:47
+msgid "Previous"
+msgstr ""
+
+#: orders/templates/orders/list.html:48
+msgid "Search..."
+msgstr ""
+
+#~ msgid "Description"
+#~ msgstr "Descrição"
+
+#~ msgid "Value"
+#~ msgstr "Valor"
+
+#~ msgid "The Base Value must be greater than 0"
+#~ msgstr "O Valor Base deve ser maior que 0"
+
+#~ msgid "Order Types"
+#~ msgstr "Tipos de Serviços"
+
+#~ msgid "The Value must be greater than 0"
+#~ msgstr "O Valor deve ser maior que 0"
 
 #~ msgid "Hello"
 #~ msgstr "Olá"

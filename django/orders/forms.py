@@ -1,38 +1,25 @@
-from decimal import Decimal
-
-from django.forms import DecimalField, ModelForm
-
-from orders.models import Order, OrderType
+from django import forms
+from django.forms import ModelForm
+from orders.models import Order
 
 
 class OrderForm(ModelForm):
-    value = DecimalField(min_value=0, max_digits=10, decimal_places=2, initial=0)
 
     class Meta:
         model = Order
-        fields = ["description", "value", "order_type"]
+        fields = ["client", "discount", "completed", "due_date", "order_date"]
+        widgets = {
+            "client": forms.Select(attrs={"class": "form-select"}),
+            "discount": forms.NumberInput(attrs={"class": "form-control", "value": 0, "min": 0, "max": 100, "step": 1}),
+            "completed": forms.CheckboxInput(attrs={"class": "form-check-input", "for": "completed"}),
+            "due_date": forms.DateInput(attrs={"class": "form-control", "type": "date", "format": "%d/%m/%Y"}),
+            "order_date": forms.DateInput(attrs={"class": "form-control", "type": "date", "format": "%d/%m/%Y"}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.instance: Order
 
-    def clean(self):
-        cleaned_data = super().clean()
+        if kwargs.get("instance") is not None:
+            self.initial["order_date"] = self.instance.order_date.strftime("%Y-%m-%d")
+            self.initial["due_date"] = self.instance.due_date.strftime("%Y-%m-%d")
 
-        value: Decimal = cleaned_data.get("value")
-        order_type: OrderType = cleaned_data.get("order_type")
-
-        # We validate if the value for the Order is not provided,
-        # we set it to the base value of the OrderType
-        if value == 0 and order_type:
-            cleaned_data["value"] = order_type.base_value
-
-        return cleaned_data
-
-
-class OrderTypeForm(ModelForm):
-    base_value = DecimalField(min_value=0, max_digits=10, decimal_places=2, initial=0)
-
-    class Meta:
-        model = OrderType
-        fields = ["description", "base_value"]

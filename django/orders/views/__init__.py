@@ -1,29 +1,15 @@
-from orders.views.orders import (
-    OrderCreateView,
-    OrderDeleteView,
-    OrderDetailView,
-    OrderListView,
-    OrderUpdateView,
-)
-
-from orders.views.order_types import (
-    OrderTypeCreateView,
-    OrderTypeDeleteView,
-    OrderTypeDetailView,
-    OrderTypeListView,
-    OrderTypeUpdateView,
-)
-
+from orders.views.orders import OrderCreateView
+from orders.views.orders import OrderDeleteView
+from orders.views.orders import OrderDetailView
+from orders.views.orders import OrderListJsonView
+from orders.views.orders import OrderListView
+from orders.views.orders import OrderUpdateView
 
 __all__ = [
     "OrderCreateView",
     "OrderDeleteView",
     "OrderDetailView",
     "OrderListView",
+    "OrderListJsonView",
     "OrderUpdateView",
-    "OrderTypeCreateView",
-    "OrderTypeDeleteView",
-    "OrderTypeDetailView",
-    "OrderTypeListView",
-    "OrderTypeUpdateView",
 ]
