@@ -12,7 +12,6 @@ django = "5.1.2"
 psycopg2-binary = "2.9.9"
 django-environ = "^0.11.2"
 environ = "^1.0"
-django-stubs = "^5.1.2"
 
 
 [tool.poetry.group.dev.dependencies]

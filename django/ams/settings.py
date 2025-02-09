@@ -53,9 +53,7 @@ LOCAL_APPS = [
     "clients",
     "core",
     "orders",
-    "garments",
     "tasks",
-    "sales",
 ]
 
 INSTALLED_APPS = INTERNAL_APPS + THIRD_PARTY_APPS + LOCAL_APPS

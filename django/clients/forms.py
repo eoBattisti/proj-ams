@@ -1,6 +1,7 @@
 import re
 
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from .models import Address
 from .models import Client
@@ -24,6 +25,10 @@ class ClientForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ClientForm, self).__init__(*args, **kwargs)
+        self.fields["number"].label = _("Number")
+        self.fields["street"].label = _("Street")
+        self.fields["neighborhood"].label = _("Neighborhood")
+        self.fields["city"].label = _("City")
         self.fields["number"].widget.attrs["class"] = "form-control"
         self.fields["street"].widget.attrs["class"] = "form-control"
         self.fields["neighborhood"].widget.attrs["class"] = "form-control"

@@ -10,10 +10,7 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("clients/", include("clients.urls")),
     path("delete/<str:app_label>/<str:model>/<uuid:pk>/", GenericDeleteView.as_view(), name="delete"),
-    path("garments/", include("garments.urls.garments")),
-    path("materials/", include("garments.urls.materials")),
     path("orders/", include("orders.urls.orders")),
     path("tasks/", include("tasks.urls.tasks")),
     path("task-types/", include("tasks.urls.task_type")),
-    path("sales/", include("sales.urls")),
 ]
