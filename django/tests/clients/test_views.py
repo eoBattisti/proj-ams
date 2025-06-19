@@ -8,7 +8,6 @@ from clients.models import Client
 
 @pytest.mark.django_db
 class TestClientsViews:
-
     @pytest.fixture
     def sample_client(self):
         address = Address.objects.create(
@@ -18,10 +17,7 @@ class TestClientsViews:
             city="City 1",
         )
         return Client.objects.create(
-            name="Client 1",
-            phone="(45) 99999-9999",
-            annotations="Annotations 1",
-            address=address
+            name="Client 1", phone="(45) 99999-9999", annotations="Annotations 1", address=address
         )
 
     def test_unauthenticated_user_access_list_clients_view(self, client):

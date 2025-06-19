@@ -8,7 +8,6 @@ from clients.forms import ClientForm
 
 @pytest.mark.django_db
 class TestClientForm:
-
     @pytest.fixture
     def sample_form_data(self):
         return {
@@ -22,9 +21,11 @@ class TestClientForm:
         }
 
     def test_missing_required_fields(self, sample_form_data):
-        form = ClientForm(data={
-            "name": sample_form_data["name"],
-        })
+        form = ClientForm(
+            data={
+                "name": sample_form_data["name"],
+            }
+        )
 
         assert form.errors["phone"] == ["This field is required."]
         assert form.errors["street"] == ["This field is required."]
@@ -35,7 +36,6 @@ class TestClientForm:
         assert not form.is_valid()
 
     def test_invalid_phone(self, sample_form_data):
-
         sample_form_data["phone"] = "(ab) cdefg-hijk"
         form = ClientForm(data=sample_form_data)
 
@@ -43,7 +43,6 @@ class TestClientForm:
         assert not form.is_valid()
 
     def test_invalid_address_fields(self, sample_form_data):
-
         sample_form_data["number"] = 0
         sample_form_data["street"] = "x" * 101
         sample_form_data["neighborhood"] = "x" * 101

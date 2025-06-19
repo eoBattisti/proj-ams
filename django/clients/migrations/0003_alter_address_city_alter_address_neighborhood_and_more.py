@@ -5,25 +5,30 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('clients', '0002_alter_address_city_alter_address_neighborhood_and_more'),
+        ("clients", "0002_alter_address_city_alter_address_neighborhood_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='address',
-            name='city',
-            field=models.CharField(max_length=100, validators=[django.core.validators.MaxLengthValidator(100)], verbose_name='City'),
+            model_name="address",
+            name="city",
+            field=models.CharField(
+                max_length=100, validators=[django.core.validators.MaxLengthValidator(100)], verbose_name="City"
+            ),
         ),
         migrations.AlterField(
-            model_name='address',
-            name='neighborhood',
-            field=models.CharField(max_length=100, validators=[django.core.validators.MaxLengthValidator(100)], verbose_name='Neighborhood'),
+            model_name="address",
+            name="neighborhood",
+            field=models.CharField(
+                max_length=100, validators=[django.core.validators.MaxLengthValidator(100)], verbose_name="Neighborhood"
+            ),
         ),
         migrations.AlterField(
-            model_name='address',
-            name='street',
-            field=models.CharField(max_length=100, validators=[django.core.validators.MaxLengthValidator(100)], verbose_name='Street'),
+            model_name="address",
+            name="street",
+            field=models.CharField(
+                max_length=100, validators=[django.core.validators.MaxLengthValidator(100)], verbose_name="Street"
+            ),
         ),
     ]

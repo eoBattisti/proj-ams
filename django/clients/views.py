@@ -1,12 +1,12 @@
 import datetime as dt
+from zoneinfo import ZoneInfo
 from dateutil.relativedelta import relativedelta
 
-
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from django.views.generic import DeleteView
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
@@ -26,7 +26,7 @@ class ClientStatsHTMXView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         total_clients = Client.objects.all()
-        last_moth = dt.date.today() - relativedelta(months=1)
+        last_moth = dt.datetime.now(tz=ZoneInfo(settings.TIME_ZONE)).date() - relativedelta(months=1)
 
         context["total_clients"] = total_clients.count()
         context["total_new_clients"] = total_clients.filter(created_at__gte=last_moth).count()
@@ -38,6 +38,7 @@ class ClientListHTMXView(LoginRequiredMixin, ListView):
     model = Client
     template_name = "clients/components/rows.html"
     context_object_name = "clients"
+
 
 class ClientDetailView(LoginRequiredMixin, DetailView):
     model = Client
@@ -51,7 +52,6 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
     form_class = ClientForm
     success_url = reverse_lazy("clients:htmx")
 
-
     def form_valid(self, form):
         try:
             self.object = form.save()
@@ -64,7 +64,6 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
 
         except Exception as e:
             print(e)
-
 
     def _is_htmx_request(self):
         return self.request.headers.get("HX-Request") == "true"
@@ -88,32 +87,6 @@ class ClientUpdateView(LoginRequiredMixin, UpdateView):
 
         except Exception as e:
             print(e)
-
-
-    def _is_htmx_request(self):
-        return self.request.headers.get("HX-Request") == "true"
-
-class ClientDeleteView(LoginRequiredMixin, DeleteView):
-    model = Client
-    template_name = "clients/delete.html"
-    success_url = reverse_lazy("clients:htmx")
-
-
-    def form_valid(self, form):
-        try:
-            if not self._is_htmx_request():
-                return super().form_valid(form)
-
-            success_url = self.get_success_url()
-            self.object.delete()
-            response = HttpResponse(success_url)
-            response["HX-Trigger"] = "closeModal"
-            return response
-
-        except Exception as e:
-            print(e)
-        return super().form_valid(form)
-
 
     def _is_htmx_request(self):
         return self.request.headers.get("HX-Request") == "true"

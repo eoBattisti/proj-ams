@@ -7,10 +7,7 @@ from clients.models import Address
 
 @pytest.mark.django_db
 class TestAddressModel:
-
-
     def test_address_creation(self):
-
         address = Address.objects.create(
             street="Street 1",
             number=1,
@@ -24,7 +21,6 @@ class TestAddressModel:
         assert address.city == "City 1"
 
     def test_address_fields_max_length(self):
-
         long_string = "a" * 200
 
         with pytest.raises(ValidationError):
@@ -51,9 +47,7 @@ class TestAddressModel:
                 city=long_string,
             ).full_clean()
 
-
     def test_address_string_representation(self):
-
         address = Address.objects.create(
             street="Street 1",
             number=1,
@@ -66,7 +60,6 @@ class TestAddressModel:
 
 @pytest.mark.django_db
 class TestClientModel:
-
     @pytest.fixture
     def sample_address(self):
         return Address.objects.create(
@@ -77,7 +70,6 @@ class TestClientModel:
         )
 
     def test_client_creation(self, sample_address):
-
         client = Client.objects.create(
             name="Client 1",
             phone="(45) 99999-9999",
@@ -91,7 +83,6 @@ class TestClientModel:
         assert client.address == sample_address
 
     def test_client_string_representation(self, sample_address):
-
         client = Client.objects.create(
             name="Client 1",
             phone="(45) 99999-9999",

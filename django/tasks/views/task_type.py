@@ -7,7 +7,6 @@ from django.db.models.query import QuerySet
 from django.http.response import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from django.views.generic import DeleteView
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
@@ -75,10 +74,4 @@ class TaskTypeUpdateView(LoginRequiredMixin, UpdateView):
     model = TaskType
     form_class = TaskTypeForm
     template_name = "task_types/form.html"
-    success_url = reverse_lazy("task_types:list")
-
-
-class TaskTypeDeleteView(LoginRequiredMixin, DeleteView):
-    model = TaskType
-    template_name = "task_types/task_type_confirm_delete.html"
     success_url = reverse_lazy("task_types:list")

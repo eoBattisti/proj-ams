@@ -11,7 +11,6 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from django.views.generic import DeleteView
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
@@ -153,9 +152,3 @@ class OrderUpdateView(LoginRequiredMixin, UpdateView):
                 print(f"Error: {e}")
 
         return render(request, self.template_name, {"form": order_form, "task_formset": task_formset})
-
-
-class OrderDeleteView(LoginRequiredMixin, DeleteView):
-    model = Order
-    template_name = "orders/delete.html"
-    success_url = reverse_lazy("orders:list")

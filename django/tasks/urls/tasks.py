@@ -1,6 +1,5 @@
 from django.urls import path
 from tasks.views.tasks import TaskCreateView
-from tasks.views.tasks import TaskDeleteView
 from tasks.views.tasks import TaskDetailView
 from tasks.views.tasks import TaskListJsonView
 from tasks.views.tasks import TaskListView
@@ -14,5 +13,4 @@ urlpatterns = [
     path("<uuid:pk>/", TaskDetailView.as_view(), name="detail"),
     path("create/", TaskCreateView.as_view(), name="create"),
     path("<uuid:pk>/update/", TaskUpdateView.as_view(), name="update"),
-    path("<uuid:pk>/delete/", TaskDeleteView.as_view(), name="delete"),
 ]
