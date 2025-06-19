@@ -2,6 +2,7 @@ import datetime as dt
 from zoneinfo import ZoneInfo
 from dateutil.relativedelta import relativedelta
 
+from django.core.paginator import Page, Paginator
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
@@ -18,6 +19,22 @@ from .models import Client
 
 class ClientListView(LoginRequiredMixin, TemplateView):
     template_name = "clients/list.html"
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        page_number: int = self.request.GET.get("page", 1)
+        clients = Client.objects.all()
+
+        paginator: Paginator = Paginator(clients, self.paginate_by)
+        page_obj: Page = paginator.get_page(page_number)
+
+        context.update({
+            "page_obj": page_obj,
+        })
+
+        return context
 
 
 class ClientStatsHTMXView(LoginRequiredMixin, TemplateView):
@@ -38,7 +55,19 @@ class ClientListHTMXView(LoginRequiredMixin, ListView):
     model = Client
     template_name = "clients/components/rows.html"
     context_object_name = "clients"
+    paginate_by = 10
 
+    def get_context_data(self, **kwargs):
+        clients = super().get_queryset()
+        context = super().get_context_data(**kwargs)
+        page_number: int = self.request.GET.get("page", 1)
+        paginator: Paginator = Paginator(clients, self.paginate_by)
+        page_obj: Page = paginator.get_page(page_number)
+
+        context["clients"] = page_obj
+
+
+        return context
 
 class ClientDetailView(LoginRequiredMixin, DetailView):
     model = Client

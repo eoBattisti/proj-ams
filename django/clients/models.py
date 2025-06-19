@@ -25,3 +25,8 @@ class Client(AbstractBaseModel):
 
     def __str__(self):
         return f"{self.name}, {self.phone}, {self.annotations} - {self.address}"
+
+    class Meta:
+        verbose_name = _("Client")
+        verbose_name_plural = _("Clients")
+        ordering = ["created_at", "name"]
