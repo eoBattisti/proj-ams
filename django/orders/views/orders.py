@@ -153,9 +153,3 @@ class OrderUpdateView(LoginRequiredMixin, UpdateView):
                 print(f"Error: {e}")
 
         return render(request, self.template_name, {"form": order_form, "task_formset": task_formset})
-
-
-class OrderDeleteView(LoginRequiredMixin, DeleteView):
-    model = Order
-    template_name = "orders/delete.html"
-    success_url = reverse_lazy("orders:list")
