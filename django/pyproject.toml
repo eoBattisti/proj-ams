@@ -27,7 +27,7 @@ test = [
 ]
 
 [tool.bandit]
-exclude_dirs = ["tests"]
+exclude_dirs = ["**/tests/**"]
 
 # See more in: https://bandit.readthedocs.io/en/latest/plugins/index.html#complete-test-plugin-listing
 tests = [
