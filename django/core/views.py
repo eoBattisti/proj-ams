@@ -28,9 +28,7 @@ class GenericDeleteView(LoginRequiredMixin, DeleteView):
         self.model = content_type.model_class()
 
     def get_success_url(self):
-        return reverse_lazy(
-            f"{self.model._meta.app_label}:htmx"
-        )
+        return reverse_lazy(f"{self.model._meta.app_label}:htmx")
 
     def form_valid(self, form):
         try:
@@ -47,7 +45,6 @@ class GenericDeleteView(LoginRequiredMixin, DeleteView):
         except Exception as e:
             print(e)
         return super().form_valid(form)
-
 
     def _is_htmx_request(self):
         return self.request.headers.get("HX-Request") == "true"

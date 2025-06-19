@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-19 13:12-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: clients/forms.py:22 clients/models.py:9
+msgid "Number"
+msgstr ""
+
+#: clients/forms.py:23 clients/models.py:8
+msgid "Street"
+msgstr ""
+
+#: clients/forms.py:24 clients/models.py:11
+msgid "Neighborhood"
+msgstr ""
+
+#: clients/forms.py:25 clients/models.py:13
+msgid "City"
+msgstr ""
+
+#: clients/models.py:20 clients/templates/clients/detail.html:41
+#: clients/templates/clients/list.html:36
+msgid "Name"
+msgstr ""
+
+#: clients/models.py:21 clients/templates/clients/detail.html:44
+#: clients/templates/clients/list.html:36
+msgid "Phone"
+msgstr ""
+
+#: clients/models.py:22 clients/templates/clients/detail.html:52
+msgid "Annotations"
+msgstr ""
+
+#: clients/templates/clients/components/stats.html:2
+#: clients/templates/clients/detail.html:3
+#: clients/templates/clients/detail.html:7
+#: clients/templates/clients/list.html:2 clients/templates/clients/list.html:6
+#: clients/templates/clients/list.html:10
+msgid "Clients"
+msgstr ""
+
+#: clients/templates/clients/components/stats.html:3
+msgid "New Clients"
+msgstr ""
+
+#: clients/templates/clients/delete.html:10
+msgid "Are you sure you want to delete?"
+msgstr ""
+
+#: clients/templates/clients/delete.html:16
+msgid "Yes"
+msgstr ""
+
+#: clients/templates/clients/detail.html:3
+#: clients/templates/clients/detail.html:7
+#: clients/templates/clients/detail.html:14
+msgid "Detail"
+msgstr ""
+
+#: clients/templates/clients/detail.html:13
+msgid "List"
+msgstr ""
+
+#: clients/templates/clients/detail.html:23
+msgid "Back"
+msgstr ""
+
+#: clients/templates/clients/detail.html:27
+msgid "Update"
+msgstr ""
+
+#: clients/templates/clients/detail.html:36
+msgid "Client Information"
+msgstr ""
+
+#: clients/templates/clients/detail.html:47
+#: clients/templates/clients/list.html:36
+msgid "Address"
+msgstr ""
+
+#: clients/templates/clients/detail.html:58
+msgid "Created At"
+msgstr ""
+
+#: clients/templates/clients/detail.html:59
+msgid "Updated At"
+msgstr ""
+
+#: clients/templates/clients/form.html:8
+msgid "Update Client"
+msgstr ""
+
+#: clients/templates/clients/form.html:10
+#: clients/templates/clients/list.html:31
+msgid "New Client"
+msgstr ""
+
+#: clients/templates/clients/form.html:76
+msgid "Save"
+msgstr ""
+
+#: clients/templates/clients/list.html:36
+msgid "Actions"
+msgstr ""
