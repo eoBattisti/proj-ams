@@ -76,9 +76,3 @@ class TaskTypeUpdateView(LoginRequiredMixin, UpdateView):
     form_class = TaskTypeForm
     template_name = "task_types/form.html"
     success_url = reverse_lazy("task_types:list")
-
-
-class TaskTypeDeleteView(LoginRequiredMixin, DeleteView):
-    model = TaskType
-    template_name = "task_types/task_type_confirm_delete.html"
-    success_url = reverse_lazy("task_types:list")
