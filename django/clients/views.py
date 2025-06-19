@@ -92,28 +92,3 @@ class ClientUpdateView(LoginRequiredMixin, UpdateView):
 
     def _is_htmx_request(self):
         return self.request.headers.get("HX-Request") == "true"
-
-class ClientDeleteView(LoginRequiredMixin, DeleteView):
-    model = Client
-    template_name = "clients/delete.html"
-    success_url = reverse_lazy("clients:htmx")
-
-
-    def form_valid(self, form):
-        try:
-            if not self._is_htmx_request():
-                return super().form_valid(form)
-
-            success_url = self.get_success_url()
-            self.object.delete()
-            response = HttpResponse(success_url)
-            response["HX-Trigger"] = "closeModal"
-            return response
-
-        except Exception as e:
-            print(e)
-        return super().form_valid(form)
-
-
-    def _is_htmx_request(self):
-        return self.request.headers.get("HX-Request") == "true"

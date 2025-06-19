@@ -10,7 +10,7 @@
     <button class="btn btn-soft btn-info" hx-get="{% url 'clients:update' client.id %}" onclick="modal.showModal()" hx-target="#modal-content" hx-swap="innerHTML">
       <i class="bi bi-pen-fill"></i>
     </button>
-    <button class="btn btn-soft btn-error" hx-get="{% url 'clients:delete' client.id %}" onclick="modal.showModal()" hx-target="#modal-content" hx-swap="innerHTML">
+    <button class="btn btn-soft btn-error" hx-get="{% url 'delete' 'clients' 'client' client.id %}" onclick="modal.showModal()" hx-target="#modal-content" hx-swap="innerHTML">
       <i class="bi bi-trash-fill"></i>
     </button>
   </c-table.td>
