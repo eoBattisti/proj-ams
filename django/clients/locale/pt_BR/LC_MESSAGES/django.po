@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-09 14:48-0300\n"
+"POT-Creation-Date: 2025-06-11 09:07-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,101 +18,117 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: clients/models.py:7
-msgid "Street"
-msgstr "Rua"
-
-#: clients/models.py:8
+#: clients/forms.py:22 clients/models.py:15
 msgid "Number"
 msgstr "Número"
 
-#: clients/models.py:9
+#: clients/forms.py:23 clients/models.py:10
+msgid "Street"
+msgstr "Rua"
+
+#: clients/forms.py:24 clients/models.py:18
 msgid "Neighborhood"
 msgstr "Bairro"
 
-#: clients/models.py:10
+#: clients/forms.py:25 clients/models.py:23
 msgid "City"
 msgstr "Cidade"
 
-#: clients/models.py:17 clients/templates/clients/detail.html:40
+#: clients/models.py:34 clients/templates/clients/list.html:36
 msgid "Name"
 msgstr "Nome"
 
-#: clients/models.py:18 clients/templates/clients/detail.html:41
+#: clients/models.py:37 clients/templates/clients/list.html:36
 msgid "Phone"
 msgstr "Telefone"
 
-#: clients/models.py:19 clients/templates/clients/detail.html:45
+#: clients/models.py:39
 msgid "Annotations"
 msgstr "Anotações"
 
-#: clients/templates/clients/detail.html:3
-#: clients/templates/clients/detail.html:7
-#: clients/templates/clients/form.html:3 clients/templates/clients/form.html:7
-#: clients/templates/clients/list.html:3 clients/templates/clients/list.html:7
+#: clients/templates/clients/components/stats.html:2
+#: clients/templates/clients/list.html:2 clients/templates/clients/list.html:6
+#: clients/templates/clients/list.html:10
 msgid "Clients"
 msgstr "Clientes"
 
-#: clients/templates/clients/detail.html:3
-#: clients/templates/clients/detail.html:7
-#: clients/templates/clients/detail.html:15
-msgid "Detail"
-msgstr "Detalhes"
+#: clients/templates/clients/components/stats.html:3
+#, fuzzy
+#| msgid "New Client"
+msgid "New Clients"
+msgstr "Novo cliente"
 
-#: clients/templates/clients/detail.html:13
-#: clients/templates/clients/form.html:13
-#: clients/templates/clients/list.html:20
-msgid "List"
-msgstr "Lista"
+#: clients/templates/clients/delete.html:10
+msgid "Are you sure you want to delete?"
+msgstr ""
 
-#: clients/templates/clients/detail.html:23
-msgid "Back"
-msgstr "Voltar"
+#: clients/templates/clients/delete.html:16
+msgid "Yes"
+msgstr ""
 
-#: clients/templates/clients/detail.html:27
-msgid "Update"
-msgstr "Atualizar"
+#: clients/templates/clients/detail.html:8
+#, fuzzy
+#| msgid "Clients"
+msgid "Client - Details"
+msgstr "Clientes"
 
-#: clients/templates/clients/detail.html:37
-msgid "Client"
-msgstr "Cliente"
+#: clients/templates/clients/form.html:8
+#, fuzzy
+#| msgid "New Client"
+msgid "Update Client"
+msgstr "Novo cliente"
 
-#: clients/templates/clients/detail.html:42
-msgid "Address"
-msgstr "Endereço"
-
-#: clients/templates/clients/form.html:3 clients/templates/clients/form.html:7
-#: clients/templates/clients/form.html:15
-msgid "Form"
-msgstr "Formulário"
-
-#: clients/templates/clients/form.html:61
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: clients/templates/clients/form.html:64
-msgid "Save"
-msgstr "Salvar"
-
-#: clients/templates/clients/list.html:30
-msgid "Total clients"
-msgstr "Total de clientes"
-
-#: clients/templates/clients/list.html:41
+#: clients/templates/clients/form.html:10
+#: clients/templates/clients/list.html:31
 msgid "New Client"
 msgstr "Novo cliente"
 
-#: clients/templates/clients/list.html:46
-msgid "Next"
-msgstr "Próximo"
+#: clients/templates/clients/form.html:76
+msgid "Save"
+msgstr "Salvar"
 
-#: clients/templates/clients/list.html:47
-msgid "Previous"
-msgstr "Anterior"
+#: clients/templates/clients/list.html:36
+msgid "Address"
+msgstr "Endereço"
 
-#: clients/templates/clients/list.html:48
-msgid "Search..."
-msgstr "Pesquisar..."
+#: clients/templates/clients/list.html:36
+#, fuzzy
+#| msgid "Annotations"
+msgid "Actions"
+msgstr "Anotações"
+
+#~ msgid "Detail"
+#~ msgstr "Detalhes"
+
+#~ msgid "List"
+#~ msgstr "Lista"
+
+#~ msgid "Back"
+#~ msgstr "Voltar"
+
+#~ msgid "Update"
+#~ msgstr "Atualizar"
+
+#~ msgid "Client"
+#~ msgstr "Cliente"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
+
+#~ msgid "Form"
+#~ msgstr "Formulário"
+
+#~ msgid "Total clients"
+#~ msgstr "Total de clientes"
+
+#~ msgid "Next"
+#~ msgstr "Próximo"
+
+#~ msgid "Previous"
+#~ msgstr "Anterior"
+
+#~ msgid "Search..."
+#~ msgstr "Pesquisar..."
 
 #~ msgid "Rua"
 #~ msgstr "Rua"

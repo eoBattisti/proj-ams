@@ -1,0 +1,22 @@
+{% for client  in clients %}
+<c-table.tr>
+  <c-table.td>{{ client.name }}</c-table.td>
+    <c-table.td>{{ client.phone }}</c-table.td>
+    <c-table.td>{{ client.address }}</c-table.td>
+  <c-table.td>
+    <a class="btn btn-soft" href="{% url 'clients:detail' client.id %}">
+      <i class="bi bi-eye-fill"></i>
+    </a >
+    <button class="btn btn-soft btn-info" hx-get="{% url 'clients:update' client.id %}" onclick="modal.showModal()" hx-target="#modal-content" hx-swap="innerHTML">
+      <i class="bi bi-pen-fill"></i>
+    </button>
+    <button class="btn btn-soft btn-error" hx-get="{% url 'clients:delete' client.id %}" onclick="modal.showModal()" hx-target="#modal-content" hx-swap="innerHTML">
+      <i class="bi bi-trash-fill"></i>
+    </button>
+  </c-table.td>
+</c-table.tr>
+{% empty %}
+<c-table.tr>
+  <c-table.td value="N/A" colspan="4" />
+</c-table.tr>
+{% endfor %}

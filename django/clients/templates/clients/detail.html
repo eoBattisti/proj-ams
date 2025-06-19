@@ -8,48 +8,62 @@
 {% endblock page-title %}
 
 {% block breadcrumb %}
-<ol class="breadcrumb">
-  <li class="breadcrumb-item active" aria-current="page">
-    <a href="{% url 'clients:list' %}">{% trans 'List' %}</a>
-  </li>
-  <li class="breadcrumb-item">{% trans 'Detail' %}</li>
-</ol>
+<div class="breadcrumbs text-sm">
+  <ul>
+    <li><a href="{% url 'clients:list' %}" class="link link-hover">{% trans 'List' %}</a></li>
+    <li>{% trans 'Detail' %}</li>
+  </ul>
+</div>
 {% endblock breadcrumb %}
 
 {% block content %}
 
-<div class="d-flex justify-content-end">
-  <a href= "{% url 'clients:list' %}" class="btn btn-secondary mx-2">
+<div class="flex justify-end gap-2 mb-4">
+  <a href="{% url 'clients:list' %}" class="btn btn-outline">
     {% trans 'Back' %}
   </a>
-  <a href= "{% url 'clients:update' client.id %}" class="btn btn-primary">
-    <i class="bi bi-pencil"></i>
+  <button hx-get="{% url 'clients:update' client.id %}" hx-target="#modal-content" hx-swap="innerHTML" onclick="modal.showModal()" class="btn btn-primary" disabled>
+    <i class="bi bi-pencil mr-1"></i>
     {% trans 'Update' %}
-  </a>
+  </button>
 </div>
 
-
-<div class="container m-0">
-  <div class="row">
-    <div class="col-md-6 p-0">
-      <div class="col-md-12">
-        <div class="card shadow">
-            <div class="card-header bg-transparent border-secondary fs-5">{% trans 'Client' %}</div>
-          <div class="card-body">
-            <p class="card-text">
-              <b>{% trans 'Name' %}:</b> {{ client.name }}<br />
-              <b>{% trans 'Phone' %}:</b> {{ client.phone }}<br />
-              <b>{% trans 'Address' %}:</b> {{ client.address }}<br />
+<div class="w-full">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="w-full">
+      <div class="card bg-base-100 shadow-lg">
+        <div class="card-header bg-base-200 border-b border-base-300 px-6 py-4">
+          <h3 class="text-lg font-medium">{% trans 'Client Information' %}</h3>
+        </div>
+        <div class="card-body px-6 py-4">
+          <div class="space-y-2">
+            <p>
+              <span class="font-semibold">{% trans 'Name' %}:</span> {{ client.name }}
             </p>
-            <p class="card-text">
-              <b>{% trans 'Annotations' %}:</b> {{ client.annotations }}
+            <p>
+              <span class="font-semibold">{% trans 'Phone' %}:</span> {{ client.phone }}
+            </p>
+            <p>
+              <span class="font-semibold">{% trans 'Address' %}:</span> {{ client.address }}
             </p>
           </div>
+          <div class="mt-4">
+            <p>
+              <span class="font-semibold">{% trans 'Annotations' %}:</span> {{ client.annotations }}
+            </p>
+          </div>
+        </div>
+        <div class="card-footer bg-base-200 border-t border-base-300 px-6 py-4">
+          <p class="text-xs">
+            <span class="font-semibold">{% trans 'Created At' %}:</span> {{ client.created_at }}
+            <span class="font-semibold ml-2">{% trans 'Updated At' %}:</span> {{ client.updated_at }}
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-{% endblock content %}
+<c-modal />
 
+{% endblock content %}

@@ -1,24 +1,24 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 
 echo "Generating Migrations"
-poetry run python manage.py makemigrations
+python3 manage.py makemigrations
 echo "Done!"
 
 echo "Migrate..."
-poetry run  python manage.py migrate --noinput
+python3 manage.py migrate --noinput
 echo "Migrated!"
 
 echo "Generating translations messages..."
-poetry run python3 manage.py makemessages -l pt_BR
+python3 manage.py makemessages -l pt_BR
 echo "Trasnslatad generated!"
 
 echo "Compiling messages..."
-poetry run python3 manage.py compilemessages -v 3
+python3 manage.py compilemessages -v 3
 echo "Compiled messages!"
 
 echo "Loading fixtures..."
-poetry run python manage.py loaddata */fixtures/*.json
+python3 manage.py loaddata */fixtures/*.json
 echo "Done!"
 
-poetry run python manage.py runserver 0.0.0.0:9000
+python3 manage.py runserver 0.0.0.0:9000

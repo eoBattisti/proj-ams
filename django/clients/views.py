@@ -1,11 +1,9 @@
-import json
-from typing import Any
+import datetime as dt
+from dateutil.relativedelta import relativedelta
+
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.paginator import Paginator
-from django.db.models import QuerySet
 from django.http import HttpResponse
-from django.urls import reverse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic import DeleteView
@@ -21,45 +19,25 @@ from .models import Client
 class ClientListView(LoginRequiredMixin, TemplateView):
     template_name = "clients/list.html"
 
+
+class ClientStatsHTMXView(LoginRequiredMixin, TemplateView):
+    template_name = "clients/components/stats.html"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["total_clients"] = Client.objects.count()
+        total_clients = Client.objects.all()
+        last_moth = dt.date.today() - relativedelta(months=1)
+
+        context["total_clients"] = total_clients.count()
+        context["total_new_clients"] = total_clients.filter(created_at__gte=last_moth).count()
+
         return context
 
 
-class ClientListJsonView(LoginRequiredMixin, ListView):
+class ClientListHTMXView(LoginRequiredMixin, ListView):
     model = Client
-
-    def get_queryset(self):
-        objects: QuerySet[Client, Client] = super().get_queryset()
-        return objects
-
-    def render_to_response(self, context: dict[str, Any], **response_kwargs: Any) -> HttpResponse:
-        page_number = self.request.GET.get("page", 1)
-        page_size = self.request.GET.get("pageSize", 10)
-
-        paginator = Paginator(self.get_queryset(), page_size)
-        page_obj = paginator.get_page(page_number)
-
-        # Prepare data for Grid.js
-        data = [
-            {
-                "id": str(client.id),
-                "name": client.name,
-                "phone": client.phone,
-                "annotations": client.annotations,
-                "address": str(client.address),
-            }
-            for client in page_obj
-        ]
-
-        response_data = {
-            "data": data,
-            "total": paginator.count,
-        }
-
-        return HttpResponse(json.dumps(response_data), content_type="application/json")
-
+    template_name = "clients/components/rows.html"
+    context_object_name = "clients"
 
 class ClientDetailView(LoginRequiredMixin, DetailView):
     model = Client
@@ -71,22 +49,71 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
     model = Client
     template_name = "clients/form.html"
     form_class = ClientForm
-    success_url = reverse_lazy("clients:list")
+    success_url = reverse_lazy("clients:htmx")
+
+
+    def form_valid(self, form):
+        try:
+            self.object = form.save()
+            if not self._is_htmx_request():
+                return super().form_valid(form)
+
+            response = HttpResponse()
+            response["HX-Trigger"] = "closeModal"
+            return response
+
+        except Exception as e:
+            print(e)
+
+
+    def _is_htmx_request(self):
+        return self.request.headers.get("HX-Request") == "true"
 
 
 class ClientUpdateView(LoginRequiredMixin, UpdateView):
     model = Client
     template_name = "clients/form.html"
     form_class = ClientForm
-    success_url = reverse_lazy("clients:list")
+    success_url = reverse_lazy("clients:htmx")
 
+    def form_valid(self, form):
+        try:
+            self.object = form.save()
+            if not self._is_htmx_request():
+                return super().form_valid(form)
+
+            response = HttpResponse()
+            response["HX-Trigger"] = "closeModal"
+            return response
+
+        except Exception as e:
+            print(e)
+
+
+    def _is_htmx_request(self):
+        return self.request.headers.get("HX-Request") == "true"
 
 class ClientDeleteView(LoginRequiredMixin, DeleteView):
     model = Client
+    template_name = "clients/delete.html"
+    success_url = reverse_lazy("clients:htmx")
 
-    def get_success_url(self):
-        return reverse("clients/list.html")
+
+    def form_valid(self, form):
+        try:
+            if not self._is_htmx_request():
+                return super().form_valid(form)
+
+            success_url = self.get_success_url()
+            self.object.delete()
+            response = HttpResponse(success_url)
+            response["HX-Trigger"] = "closeModal"
+            return response
+
+        except Exception as e:
+            print(e)
+        return super().form_valid(form)
 
 
-class ClientsListView(LoginRequiredMixin, TemplateView):
-    template_name = "clients/list.html"
+    def _is_htmx_request(self):
+        return self.request.headers.get("HX-Request") == "true"

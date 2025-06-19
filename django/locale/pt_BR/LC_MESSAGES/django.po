@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-09 14:36-0300\n"
+"POT-Creation-Date: 2025-06-05 17:03-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,30 +17,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: ams/settings.py:133
+
+#: ams/settings.py:130
 msgid "English"
 msgstr "Inglês"
 
-#: ams/settings.py:134
+#: ams/settings.py:131
 msgid "Brazilian Portuguese"
 msgstr "Português do Brasil"
 
-#: ams/templates/components/navbar.html:22
+#: ams/templates/components/navbar.html:13
 msgid "Sewing"
 msgstr "Costura"
 
-#: ams/templates/components/navbar.html:32
+#: ams/templates/components/navbar.html:20
 msgid "Clients"
 msgstr "Clientes"
 
-#: ams/templates/components/navbar.html:41
+#: ams/templates/components/navbar.html:21
 msgid "Tasks"
 msgstr "Serviços"
 
-#: ams/templates/components/navbar.html:50
+#: ams/templates/components/navbar.html:22
 msgid "Task Types"
 msgstr "Tipos de Serviços"
 
-#: ams/templates/components/navbar.html:59
+#: ams/templates/components/navbar.html:23
 msgid "Orders"
 msgstr "Pedidos"

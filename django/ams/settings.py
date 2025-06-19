@@ -27,7 +27,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("SECRET_KEY")
 allowed_hosts_list = env("ALLOWED_HOSTS").split(",")
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -46,7 +45,9 @@ INTERNAL_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    "django_cotton",
+]
 
 LOCAL_APPS = [
     "ams",
@@ -99,10 +100,6 @@ DATABASES = {
     "default": {
         "ENGINE": env("SQL_ENGINE"),
         "NAME": env("SQL_DATABASE"),
-        "USER": env("SQL_USER"),
-        "PASSWORD": env("SQL_PASSWORD"),
-        "HOST": env("SQL_HOST"),
-        "PORT": env("SQL_PORT"),
     }
 }
 

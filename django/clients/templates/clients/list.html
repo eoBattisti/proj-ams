@@ -1,5 +1,4 @@
 {% extends 'layout.html' %} {% load i18n static %} 
-
 {% block title %}{% trans 'Clients' %}{% endblock title %} 
 
 {% block page-title %}
@@ -7,52 +6,55 @@
 {% trans 'Clients' %} 
 {% endblock page-title %}
 
-<link
-  href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
-  rel="stylesheet"
-/>
-<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-
-
 {% block breadcrumb %}
-<ol class="breadcrumb">
-  <li class="breadcrumb-item active" aria-current="page">
-    <a href="{% url 'clients:list' %}">{% trans 'List' %}</a>
-  </li>
-</ol>
+<c-breadcrumb-link href="{% url 'clients:list' %}" icon="bi bi-award" title="{% trans 'Clients'%}" ></c-breadcrumb-link>
 {% endblock breadcrumb %} 
 
 {% block content %}
-
-<div class="row">
-  <div class="col-sm-3">
-    <div class="card text-bg-success mb-3" style="max-width: 18rem;">
-      <div class="card-header text-center">{% trans 'Total clients' %}</div>
-      <div class="card-body">
-        <p class="card-text fs-5 text-center">{{ total_clients }}</p>
-      </div>
-    </div>
-  </div>
+<div
+  class="stats shadow mx-3 my-2"
+  hx-get="{% url 'clients:stats' %}"
+  hx-trigger="load, refreshClients"
+  hx-swap="innerHTML"
+>
 </div>
 
-<div class="d-flex justify-content-end">
-  <a href= "{% url 'clients:create' %}" class="btn btn-success">
-    <i class="bi bi-plus"></i>
+<div class="flex justify-end mb-4">
+  <button 
+    class="btn btn-success"
+    onclick="modal.showModal()"
+    hx-get="{% url 'clients:create' %}"
+    hx-target="#modal-content"
+    hx-swap="innerHTML"
+  >
+    <i class="bi bi-plus mr-2"></i>
     {% trans 'New Client' %}
-  </a>
+  </button>
 </div>
 
-<div id="tabela-clientes" class="shadow row rounded-2 p-2 mt-3" data-url="{% url 'clients:json' %}"
-  data-next-button-label="{% trans 'Next' %}"
-  data-previous-button-label="{% trans 'Previous' %}"
-  data-search-placeholder="{% trans 'Search...' %}"
-  data-app-name="clients"
-  data-model-name="client"></div>
+<c-table 
+  :headers="['{% trans 'Name'%}', '{% trans 'Phone'%}', '{% trans 'Address' %}', '{% trans 'Actions' %}']"
+  trigger="load, refreshClients"
+  swap="innerHTML"
+  url="{% url 'clients:htmx' %}"
+/>
 
-<div id="modal-container"></div>
+<c-modal />
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+    document.body.addEventListener("htmx:afterRequest", function (event) {
+      if (event.detail.xhr.status == 200 && event.detail.elt.tagName == "DIV") {
+        console.log(event.detail.elt);
+        htmx.trigger("#tbody", "refreshClients");
+      }
+    });
+
+    document.body.addEventListener('closeModal', function() {
+        document.getElementById('modal').close();
+    });
+
+  });
+</script>
 {% endblock content %} 
-
-{% block js-external %}
-<script src="{% static 'js/detail_modal.js' %}"></script>
-<script src="{% static 'js/clients_list.js' %}"></script>
-{% endblock js-external %}

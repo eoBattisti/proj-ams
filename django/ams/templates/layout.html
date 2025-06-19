@@ -6,19 +6,21 @@
 {% endblock css-external %}
 
 {% block layout %}
-<div class="d-flex">
+<div class="flex">
 
   {% include 'components/navbar.html'%}
 
-  <div class="flex-grow-1 mx-3">
-    <div class="d-flex flex-column flex-shrink-0 p-3">
+  <div class="flex-1 mx-3">
+    <div class="flex flex-col flex-shrink-0 p-3">
 
-      <h1 class="h3">{% block page-title %}{% endblock page-title %}</h1>
+      <h1 class="text-2xl my-2 font-semibold">{% block page-title %}{% endblock page-title %}</h1>
 
-      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-        {% block breadcrumb %}
-        {% endblock breadcrumb %}
-      </nav>
+      <div class="breadcrumbs text-sm my-2 mx-3">
+        <ul>
+          {% block breadcrumb %}
+          {% endblock breadcrumb %}
+        </ul>
+      </div>
 
       {% block content %}
       {% endblock content %}

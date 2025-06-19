@@ -1,37 +1,70 @@
-FROM python:3.10-slim
+# syntax=docker/dockerfile:1
+FROM python:3.12-alpine as builder
 
-ENV PIP_NO_CACHE_DIR off
-ENV PIP_DISABLE_PIP_VERSION_CHECK on
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV COLUMN 80
+ENV PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    COLUMN=80 \
+    UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy \
+    UV_PYTHON_DOWNLOADS=0 \
+    VIRTUAL_ENV=/opt/venv \
+    PATH="${VIRTUAL_ENV}/bin:$PATH"
+
+WORKDIR /asm/
+
+RUN --mount=type=cache,target=/var/cache/apk/,sharing=locked \
+    apk add --no-cache --virtual .build-deps \
+    gcc \
+    musl-dev \
+    postgresql-dev \
+    python3-dev \
+    linux-headers \
+    libffi-dev
+
+COPY --from=ghcr.io/astral-sh/uv:0.6.9 /uv /uvx /bin/
+COPY ./pyproject.toml .
+
+RUN uv venv ${VIRTUAL_ENV} && \
+    uv pip compile --all-extras pyproject.toml --output-file=requirements.txt && \
+    uv pip install -r requirements.txt && \
+    find /opt/venv -type d -name "__pycache__" -exec rm -rf {} + && \
+    find /opt/venv -name "*.pyc" -delete && \
+    find /opt/venv -name "*.pyo" -delete && \
+    find /opt/venv -name "*.dist-info" -exec rm -rf {} + && \
+    find /opt/venv -name "*.egg-info" -exec rm -rf {} + && \
+    /opt/venv/bin/pip uninstall -y pip setuptools wheel || true && \
+    apk del .build-deps
+
+COPY . .
+
+FROM python:3.12-alpine as final
 
 ARG USERNAME=asm
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-ENV HOME=/home/${USERNAME}
+ENV VIRTUAL_ENV=/opt/venv \
+    PATH="/opt/venv/bin:$PATH" \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
 
-RUN apt update && apt upgrade -y
+RUN --mount=type=cache,target=/var/cache/apk/,sharing=locked \
+    apk add --no-cache \
+    libpq \
+    netcat-openbsd \
+    postgresql-client \
+    gettext \
+    su-exec \
+    && addgroup -g ${USER_GID} ${USERNAME} \
+    && adduser -u ${USER_UID} -G ${USERNAME} -h /home/${USERNAME} -s /bin/sh -D ${USERNAME}
 
-RUN apt -y install libpq-dev python3-dev gcc netcat-traditional make cron \
-        postgresql postgresql-contrib build-essential gettext
+WORKDIR /home/${USERNAME}/asm/
 
-RUN curl -sSL https://install.python-poetry.org | python3 -
-
-WORKDIR ${HOME}/asm/
-
-RUN mkdir -p /etc/sudoers.d/
-
-RUN groupadd --gid ${USER_GID} ${USERNAME} && \
-    useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME} && \
-    echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} && \
-    echo chmod 0440 /etc/sudoers.d/${USERNAME}
-
-COPY . .
-
-RUN bash ./docker/build.sh
+COPY --from=builder --chown=${USERNAME}:${USERNAME} /opt/venv /opt/venv
+COPY --from=builder --chown=${USERNAME}:${USERNAME} /asm /home/${USERNAME}/asm
 
 USER ${USERNAME}
 
-ENTRYPOINT [ "./docker/entrypoint.sh" ]
+ENTRYPOINT ["./docker/entrypoint.sh"]

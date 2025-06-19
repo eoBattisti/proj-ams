@@ -1,28 +1,26 @@
-[tool.poetry]
+[project]
 name = "proj-ams"
 version = "0.1.0"
 description = "An Atelier Management System to help seamstresses manage orders, incomes, expenses, etc."
 authors = ["Nicolas Battisti <nickgabrielbd@gmail.com>"]
 readme = "README.md"
 package-mode = false
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.1.2",
+    "psycopg2-binary>=2.9.9",
+    "django-environ>=0.11.2",
+    "environ>=1.0",
+    "django-cotton>=2.1.2",
+    "python-dateutil>=2.9.0.post0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-django = "5.1.2"
-psycopg2-binary = "2.9.9"
-django-environ = "^0.11.2"
-environ = "^1.0"
-
-
-[tool.poetry.group.dev.dependencies]
-ruff = "0.8.2"
-bandit = "^1.8.0"
-pytest = "^8.3.4"
-pytest-django = "^4.9.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+test = [
+    "pytest>=8.4.0",
+    "pytest-cov>=6.1.1",
+    "pytest-django>=4.11.1",
+]
 
 [tool.bandit]
 exclude_dirs = ["tests"]
@@ -160,6 +158,21 @@ force-single-line = true
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "ams.settings"
-addopts = "-s -vv -x --cache-clear" 
+addopts = "-s -vv -x --cache-clear --tb=short --strict-markers --cov --cov-report=term-missing" 
 cache_dir = "/tmp/.pytest_cache"
-python_files = ["tests/test_*.py"]
+python_files = ["tests/test_*.py", "tests/**/*.py"]
+
+[tool.coverage.run]
+omit = [
+    "*/migrations/*",
+    "*/venv/*",
+    "*/env/*",
+    "*/virtualenv/*",
+    "manage.py",
+    "*/settings/*",
+    "*/tests/*",
+    "*/__pycache__/*",
+    "*/site-packages/*",
+    ".tox/*",
+]
+

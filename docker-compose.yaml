@@ -1,13 +1,5 @@
 services:
 
-  postgres:
-    image: postgres
-    container_name: ams-database
-    volumes:
-      - database_data:/var/lib/postgresql/data
-    networks:
-      - ams-network
-
   application:
     container_name: ams-application
     build: 
@@ -17,15 +9,8 @@ services:
       - "9000:9000"
     volumes:
       - ./django/:/home/asm/asm/
-    links:
-      - postgres 
-    depends_on:
-      - postgres 
     networks:
       - ams-network
-
-volumes:
-  database_data:
 
 networks:
   ams-network:

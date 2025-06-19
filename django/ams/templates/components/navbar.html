@@ -1,67 +1,27 @@
 {% load static i18n %} {% block navbar %}
-<div class="flex-shrink-0 p-3 shadow" style="width: 280px; height: 100vh">
-  <a
-    href="{% url 'orders:list' %}"
-    class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
-  >
-    <svg class="bi pe-none me-2" width="30" height="24">
-      <use xlink:href="#bootstrap"></use>
-    </svg>
-    <span class="fs-5 fw-semibold">AMS</span>
+<div x-data="{ open: $persist(false) }" class="flex-shrink-0 p-3 shadow-md w-70 h-screen">
+  <a href="{% url 'orders:list' %}" class="flex items-center pb-3 mb-3">
+    <span class="text-xl font-semibold">AMS</span>
   </a>
-  <ul class="list-unstyled ps-0">
-    <li class="mb-1">
+  <div class="border-t border-gray-200 mb-3"></div>
       <button
-        class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-        data-bs-toggle="collapse"
-        data-bs-target="#home-collapse"
-        aria-expanded="false"
+        class="flex items-center w-full px-3 py-2 text-left hover:text-gray-600 rounded border-0 transition-colors duration-200"
+        :class="open ? 'font-semibold text-gray-600' : '' "
+        @click="open = !open"
       >
-        <i class="bi bi-pin mx-2"></i>
-
+        <i :class="open ? 'bi bi-arrow-down' : 'bi bi-arrow-right'" class="mr-2" > </i>
         {% trans 'Sewing' %}
       </button>
-      <div class="collapse" id="home-collapse" style="">
-        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-          <li>
-            <a
-              href="{% url 'clients:list' %}"
-              class="link-body-emphasis d-inline-flex text-decoration-none rounded"
-            >
-              <i class="bi bi-person mx-2"></i>
-              {% trans 'Clients' %}
-            </a>
-          </li>
-          <li>
-            <a
-              href="{% url 'tasks:list' %}"
-              class="link-body-emphasis d-inline-flex text-decoration-none rounded"
-            >
-              <i class="bi bi-book mx-2"></i>
-              {% trans 'Tasks' %}
-            </a>
-          </li>
-          <li>
-            <a
-              href="{% url 'task_types:list' %}"
-              class="link-body-emphasis d-inline-flex text-decoration-none rounded"
-            >
-              <i class="bi bi-book-half mx-2"></i>
-              {% trans 'Task Types' %}
-            </a>
-          </li>
-          <li>
-            <a
-              href="{% url 'orders:list' %}"
-              class="link-body-emphasis d-inline-flex text-decoration-none rounded disabled"
-            >
-              <i class="bi bi-cart mx-2"></i>
-              {% trans 'Orders' %}
-            </a>
-          </li>
+      <div 
+        x-show="open"
+        x-collapse
+        x-collapse.duration.400ms>
+        <ul class="ml-4 mt-2 space-y-1 text-sm">
+          <c-navlink href="{% url 'clients:list' %}" icon="bi bi-person" title="{% trans 'Clients'%}" ></c-navlink>
+          <c-navlink href="{% url 'tasks:list' %}" icon="bi bi-book" title="{% trans 'Tasks'%}" ></c-navlink>
+          <c-navlink href="{% url 'task_types:list' %}" icon="bi bi-book-half" title="{% trans 'Task Types'%}" ></c-navlink>
+          <c-navlink href="{% url 'orders:list' %}" icon="bi bi-cart" title="{% trans 'Orders'%}" ></c-navlink>
         </ul>
       </div>
-    </li>
-  </ul>
 </div>
 {% endblock navbar %}

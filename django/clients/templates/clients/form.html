@@ -1,74 +1,80 @@
-{% extends 'layout.html' %} {% load i18n static %}
+{% load i18n static %}
 
-{% block title %}{% trans 'Clients' %} - {% trans 'Form' %} {% endblock title %}
+<form method="dialog">
+  <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+</form>
+<div class="py-3">
+  {% if object.pk %}
+    <h3 class="mb-4 text-center font-bold">{% trans 'Update Client' %}</h3>
+  {% else %}
+    <h3 class="mb-4 text-center font-bold">{% trans 'New Client' %}</h3>
+  {% endif %}
+  <form 
+    method="post"
+    novalidate
+    {% if object.pk %}
+      hx-post="{% url 'clients:update' object.pk %}"
+    {% else %}
+      hx-post="{% url 'clients:create' %}"
+    {% endif %}
+    hx-target="#modal-content"
+    hx-swap="innerHTML"
+  >
+      {% csrf_token %}
+      <div class="grid grid-cols-2 gap-4">
 
-{% block page-title %}
-<i class="bi bi-award mx-2"></i>
-{% trans 'Clients' %} - {% trans 'Form' %}
-{% endblock page-title %}
-
-{% block breadcrumb %}
-<ol class="breadcrumb">
-  <li class="breadcrumb-item active" aria-current="page">
-    <a href="{% url 'clients:list' %}">{% trans 'List' %}</a>
-  </li>
-  <li class="breadcrumb-item">{% trans 'Form' %}</li>
-</ol>
-{% endblock breadcrumb %}
-
-{% block content %}
-
-<div class="container py-3">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card shadow">
-        <div class="card-body">
-          <form method="post" novalidate>
-            {% csrf_token %}
-
-            {% for field in form %}
-            <div class="mb-3">
-              <label for="{{ field.id_for_label }}" class="form-label">
-                {{ field.label }}
-              </label>
-
-              {% if field.field.widget.input_type == 'checkbox' %}
-              <div class="form-check">
-                {{ field }}
-              </div>
+          {% for field in form %}
+          <div class="form-control">
+            <label 
+              class="input w-full {% if field.errors %} input-error {% endif %}" 
+              for="{{ field.id_for_label }}"
+            >
+              <span class="label">{{ field.label }}</span>
+              <input 
+                type="{{ field.field.widget.input_type }}" 
+                name="{{ field.name }}" 
+                id="{{ field.id_for_label }}"
+                value="{{ field.value|default:'' }}" 
+                {% if field.field.required %}required{% endif %}
+                placeholder="{{ field.help_text|default:'' }}" />
+              {% if field.field.required %}
+                <span class="badge badge-secondary badge-xs">Required</span>
               {% else %}
-                {{ field }}
+                <span class="badge badge-neutral badge-xs">Optional</span>
               {% endif %}
+            </label>
 
-              {% if field.errors %}
-              {% for error in field.errors %}
-              <div class="invalid-feedback d-block">
-                {{ error }}
+            <!-- {% if field.field.widget.input_type == 'checkbox' %} -->
+            <!--     <label class="label cursor-pointer"> -->
+            <!--       {{ field }} -->
+            <!--       <span class="label-text">{{ field.label }}</span> -->
+            <!--     </label> -->
+            <!-- {% elif field.field.widget.input_type == 'textarea' %} -->
+            <!--   <textarea  -->
+            <!--     name="{{ field.name }}"  -->
+            <!--     id="{{ field.id_for_label }}" -->
+            <!--     class="textarea textarea-bordered {% if field.errors %}textarea-error{% endif %}" -->
+            <!--     {% if field.field.required %}required{% endif %} -->
+            <!--     placeholder="{{ field.help_text|default:'' }}">{{ field.value|default:'' }}</textarea> -->
+            <!-- {% endif %} -->
+
+            <!-- Display field errors -->
+            {% if field.errors %}
+              <div class="label">
+                {% for error in field.errors %}
+                  <span class="text-error">{{ error }}</span>
+                {% endfor %}
               </div>
-              {% endfor %}
-              {% endif %}
-
-              {% if field.help_text %}
-              <small class="form-text text-muted">
-                {{ field.help_text }}
-              </small>
-              {% endif %}
-            </div>
-            {% endfor %}
-
-            <div class="d-flex mt-4 justify-content-end">
-              <a href="{% url 'clients:list' %}" class="btn btn-secondary mx-2">
-                {% trans 'Cancel' %}
-              </a>
-              <button type="submit" class="btn btn-success mx-2">
-                {% trans 'Save' %}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+            {% endif %}
+          </div>
+          {% endfor %}
     </div>
-  </div>
+    <div class="modal-action">
+      <button 
+        type="submit"
+        class="btn btn-success">
+        {% trans 'Save' %}
+      </button>
+    </div>
+  </form>
 </div>
-
-{% endblock content %}

@@ -1,4 +1,19 @@
-<form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm">
+{% load i18n %}
+
+<form 
+  method="post"
+  hx-post="{% url 'clients:delete' object.pk %}"
+  hx-target="#modal-content"
+  hx-swap="innerHTML"
+>
+  {% csrf_token %}
+  <h3 class="mb-4 text-center font-bold">{% trans 'Are you sure you want to delete?' %}</h3>
+  <p class="mb-4 text-center">{{ object }}</p>
+  <div class="modal-action">
+    <button 
+      type="submit"
+      class="btn btn-success">
+      {% trans 'Yes' %}
+    </button>
+  </div>
 </form>
