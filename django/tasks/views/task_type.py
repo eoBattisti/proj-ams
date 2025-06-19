@@ -7,7 +7,6 @@ from django.db.models.query import QuerySet
 from django.http.response import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from django.views.generic import DeleteView
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
