@@ -36,7 +36,9 @@
   :headers="['{% trans 'Name'%}', '{% trans 'Phone'%}', '{% trans 'Address' %}', '{% trans 'Actions' %}']"
   trigger="load, refreshClients"
   swap="innerHTML"
-  url="{% url 'clients:htmx' %}"
+  url="{% url 'clients:htmx' %}?page={{ page_obj.number }}"
+  app_htmx_url={% url 'clients:htmx' %}
+  :attrs="page-obj"
 />
 
 <c-modal />

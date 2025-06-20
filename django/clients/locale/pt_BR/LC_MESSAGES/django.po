@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-19 13:12-0300\n"
+"POT-Creation-Date: 2025-06-20 08:06-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
 #: clients/forms.py:22 clients/models.py:9
 msgid "Number"
 msgstr ""
@@ -47,7 +48,11 @@ msgstr ""
 msgid "Annotations"
 msgstr ""
 
-#: clients/templates/clients/components/stats.html:2
+#: clients/models.py:30
+msgid "Client"
+msgstr ""
+
+#: clients/models.py:31 clients/templates/clients/components/stats.html:2
 #: clients/templates/clients/detail.html:3
 #: clients/templates/clients/detail.html:7
 #: clients/templates/clients/list.html:2 clients/templates/clients/list.html:6
