@@ -24,6 +24,7 @@ class ClientListView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+
         page_number: int = self.request.GET.get("page", 1)
         clients = Client.objects.all()
 
