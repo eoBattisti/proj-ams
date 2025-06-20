@@ -1,7 +1,23 @@
 {% load static i18n %}
 
-<div class="overflow-x-auto">
-  <table class="min-w-full bg-white">
+<div 
+  x-data="{ searching: false }"
+  class="overflow-x-auto overflow-x-auto">
+
+  <div class="flex items-center justify-between p-2">
+    <input 
+      type="search"
+      name="search"
+      x-on:input="value != '' ? searching = true : searching = false"
+      x-model="value"
+      hx-get="{{ url }}"
+      hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load"
+      hx-target="#tbody"
+      placeholder="{% trans 'Search' %}"
+      class="input" />
+  </div>
+
+  <table class="table">
     <thead class="bg-gray-50">
       <tr>
         {% for header in headers %}
@@ -21,51 +37,54 @@
       <tr>
         <p class"hidden" hidden >{{ headers.pop.0 }}</p>
         {% for header in headers %}
-        <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> </th>
+        <th class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> </th>
         {% endfor %}
         <th class="px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-{% if page_obj.has_other_pages %}
-  <div class="flex items-center justify-between sm:px-6 mt-4">
-    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-end">
-      <div>
-        <div
-          x-data="{number: {{ page_obj.number }}, max: {{ page_obj.paginator.num_pages }}, min: 1}"
-          aria-label="Pagination" 
-          class="join">
-            <button 
-              x-on:click="number - 1 < min ? number : number = number - 1"
-              x-bind:hx-vals='`{"page": ${number}}`'
-              x-bind:class="number == min ? 'btn-disabled' : '' "
-              hx-get="{{ app_htmx_url }}" %}?{% if search_query %}&search={{ search_query }}{% endif %}"
-              hx-trigger="click"
-              hx-target="#tbody"
-              hx-swap="innerHTML"
-              class="join-item btn">
-              <span class="sr-only">{% trans 'Previous' %}</span>
-              <i class="bi bi-chevron-left"></i>
-            </button>
-            <button 
-              class="join-item btn">
-              {% trans 'Page' %} <strong x-text="number"></strong>/<strong x-text="max"></strong>
-            </button>
-            <button 
-              x-on:click="number + 1 > max ? number : number = number + 1"
-              x-bind:class="number == max ? 'btn-disabled' : '' "
-              x-bind:hx-vals='`{"page": ${number}}`'
-              hx-get="{{ app_htmx_url }}?{% if search_query %}&search={{ search_query }}{% endif %}"
-              hx-target="#tbody"
-              hx-swap="innerHTML"
-              class="join-item btn">
-                <span class="sr-only">{% trans 'Next' %}</span>
-                <i class="bi bi-chevron-right"></i>
-            </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endif %}
+          {% if page_obj.has_other_pages %}
+            <div 
+              :class="searching ? 'hidden' : '' "
+              class="flex items-center justify-between">
+              <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-end">
+                <div>
+                  <div
+                    x-data="{number: {{ page_obj.number }}, max: {{ page_obj.paginator.num_pages }}, min: 1}"
+                    aria-label="Pagination" 
+                    class="join">
+                      <button 
+                        x-on:click="number - 1 < min ? number : number = number - 1"
+                        x-bind:hx-vals='`{"page": ${number}}`'
+                        x-bind:class="number == min ? 'btn-disabled' : '' "
+                        hx-get="{{ app_htmx_url }}" %}?{% if search_query %}&search={{ search_query }}{% endif %}"
+                        hx-trigger="click"
+                        hx-target="#tbody"
+                        hx-swap="innerHTML"
+                        class="join-item btn">
+                        <span class="sr-only">{% trans 'Previous' %}</span>
+                        <i class="bi bi-chevron-left"></i>
+                      </button>
+                      <button 
+                        class="join-item btn">
+                        {% trans 'Page' %} <strong x-text="number"></strong>/<strong x-text="max"></strong>
+                      </button>
+                      <button 
+                        x-on:click="number + 1 > max ? number : number = number + 1"
+                        x-bind:class="number == max ? 'btn-disabled' : '' "
+                        x-bind:hx-vals='`{"page": ${number}}`'
+                        hx-get="{{ app_htmx_url }}?{% if search_query %}&search={{ search_query }}{% endif %}"
+                        hx-target="#tbody"
+                        hx-swap="innerHTML"
+                        class="join-item btn">
+                          <span class="sr-only">{% trans 'Next' %}</span>
+                          <i class="bi bi-chevron-right"></i>
+                      </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
         </th>
       </tr>
     </tfoot>
   </table>
+
 </div>

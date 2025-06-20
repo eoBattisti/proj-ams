@@ -1,3 +1,4 @@
+{% load i18n %}
 {% for client  in clients %}
 <c-table.tr>
   <c-table.td>{{ client.name }}</c-table.td>
@@ -17,6 +18,8 @@
 </c-table.tr>
 {% empty %}
 <c-table.tr>
-  <c-table.td value="N/A" colspan="4" />
+  <c-table.td colspan="4">
+    <p class="text-center font-bold p-3">{% trans 'No clients found' %}</p>
+  </c-table.td>
 </c-table.tr>
 {% endfor %}
