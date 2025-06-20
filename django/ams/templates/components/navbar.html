@@ -1,5 +1,5 @@
 {% load static i18n %} {% block navbar %}
-<div x-data="{ open: $persist(false) }" class="flex-shrink-0 p-3 shadow-md w-70 h-screen">
+<div x-data="{ open: $persist(false) }" class="flex-shrink-0 p-3 shadow-md w-70 h-auto">
   <a href="{% url 'orders:list' %}" class="flex items-center pb-3 mb-3">
     <span class="text-xl font-semibold">AMS</span>
   </a>
