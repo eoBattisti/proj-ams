@@ -61,13 +61,12 @@ class ClientListHTMXView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
-
         search = self.request.GET.get("search")
         clients = super().get_queryset()
         context = super().get_context_data(**kwargs)
 
         if search:
-            clients = Client.objects.filter( Q(name__icontains=search))
+            clients = Client.objects.filter(Q(name__icontains=search))
 
         page_number: int = self.request.GET.get("page", 1)
         paginator: Paginator = Paginator(clients, self.paginate_by)
