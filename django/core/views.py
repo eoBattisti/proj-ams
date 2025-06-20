@@ -51,6 +51,10 @@ class GenericDeleteView(LoginRequiredMixin, DeleteView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.model.objects.get(pk=kwargs["pk"])
-        context = self.get_context_data(object=self.object, app_label=kwargs["app_label"], model=kwargs["model"])
+        context = self.get_context_data(
+            object=self.object,
+            app_label=kwargs["app_label"],
+            model=kwargs["model"]
+        )
 
         return self.render_to_response(context)
