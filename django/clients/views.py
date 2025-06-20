@@ -24,16 +24,17 @@ class ClientListView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-
         page_number: int = self.request.GET.get("page", 1)
         clients = Client.objects.all()
 
         paginator: Paginator = Paginator(clients, self.paginate_by)
         page_obj: Page = paginator.get_page(page_number)
 
-        context.update({
-            "page_obj": page_obj,
-        })
+        context.update(
+            {
+                "page_obj": page_obj,
+            }
+        )
 
         return context
 
@@ -67,8 +68,8 @@ class ClientListHTMXView(LoginRequiredMixin, ListView):
 
         context["clients"] = page_obj
 
-
         return context
+
 
 class ClientDetailView(LoginRequiredMixin, DetailView):
     model = Client
