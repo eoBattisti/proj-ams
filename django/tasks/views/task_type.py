@@ -4,6 +4,7 @@ from django.db.models.query import Q
 from django.core.paginator import Page
 from django.db.models import Avg
 from django.db.models import Max
+from django.db.models import Min
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.http.response import HttpResponse
@@ -48,6 +49,7 @@ class TaskTypeHTMXStatsView(LoginRequiredMixin, TemplateView):
         context["total_task_types"] = TaskType.objects.count()
         context["avg_base_value"] = TaskType.objects.all().aggregate(Avg("base_value")).get("base_value__avg", 0)
         context["highest_base_value"] = TaskType.objects.all().aggregate(Max("base_value")).get("base_value__max", 0)
+        context["lowest_base_value"] = TaskType.objects.all().aggregate(Min("base_value")).get("base_value__min", 0)
         return context
 
 
