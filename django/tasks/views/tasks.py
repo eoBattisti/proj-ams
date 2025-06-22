@@ -25,8 +25,10 @@ class TaskListView(LoginRequiredMixin, ListView):
         return context
 
 
-class TaskListJsonView(LoginRequiredMixin, ListView):
+class TaskListHTMXView(LoginRequiredMixin, ListView):
     model = Task
+    template_name = "tasks/list.html"
+    context_object_name = "tasks"
 
     def get_queryset(self):
         objects: QuerySet[Task, Task] = super().get_queryset()

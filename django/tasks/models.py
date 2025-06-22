@@ -14,7 +14,7 @@ class TaskType(AbstractBaseModel):
         max_digits=10,
         decimal_places=2,
         null=False,
-        blank=True,
+        blank=False,
         validators=[MinValueValidator(limit_value=0, message=_("The Value must be greater than 0"))],
     )
 

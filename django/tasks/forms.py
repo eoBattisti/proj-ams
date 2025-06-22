@@ -47,7 +47,9 @@ class TaskTypeForm(ModelForm):
         fields = ["description", "base_value"]
         widgets = {
             "description": forms.TextInput(attrs={"class": "form-control", "autofocus": True}),
-            "base_value": forms.NumberInput(attrs={"class": "form-control", "value": 0, "min": 0, "step": 1}),
+            "base_value": forms.NumberInput(
+                attrs={"class": "form-control", "value": 0, "min": 0, "step": 1, "required": True}
+            ),
         }
 
 

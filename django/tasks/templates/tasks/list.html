@@ -15,11 +15,7 @@
 
 
 {% block breadcrumb %}
-<ol class="breadcrumb">
-  <li class="breadcrumb-item active" aria-current="page">
-    <a href="{% url 'tasks:list' %}">{% trans 'List' %}</a>
-  </li>
-</ol>
+<c-breadcrumb-link href="{% url 'tasks:list' %}" icon="bi bi-award" title="{% trans 'Tasks'%}" ></c-breadcrumb-link>
 {% endblock breadcrumb %}
 
 {% block content %}

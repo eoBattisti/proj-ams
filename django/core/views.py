@@ -20,7 +20,6 @@ class GenericDeleteView(LoginRequiredMixin, DeleteView):
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
-        print(kwargs)
         content_type = ContentType.objects.get(
             app_label=kwargs["app_label"],
             model=kwargs["model"],
@@ -28,7 +27,9 @@ class GenericDeleteView(LoginRequiredMixin, DeleteView):
         self.model = content_type.model_class()
 
     def get_success_url(self):
-        return reverse_lazy(f"{self.model._meta.app_label}:htmx")
+        app_label = self.model._meta.verbose_name_raw.lower()
+        app_label = app_label.replace(" ", "_")
+        return reverse_lazy(f"{app_label}s:htmx")
 
     def form_valid(self, form):
         try:
