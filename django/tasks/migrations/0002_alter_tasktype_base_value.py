@@ -5,15 +5,21 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('tasks', '0001_initial'),
+        ("tasks", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='tasktype',
-            name='base_value',
-            field=models.DecimalField(decimal_places=2, max_digits=10, validators=[django.core.validators.MinValueValidator(limit_value=0, message='The Value must be greater than 0')], verbose_name='Base Value'),
+            model_name="tasktype",
+            name="base_value",
+            field=models.DecimalField(
+                decimal_places=2,
+                max_digits=10,
+                validators=[
+                    django.core.validators.MinValueValidator(limit_value=0, message="The Value must be greater than 0")
+                ],
+                verbose_name="Base Value",
+            ),
         ),
     ]
