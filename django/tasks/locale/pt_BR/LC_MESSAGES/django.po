@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-09 14:36-0300\n"
+"POT-Creation-Date: 2025-06-23 08:48-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
 #: tasks/models.py:11 tasks/models.py:31
-#: tasks/templates/task_types/detail.html:40
-#: tasks/templates/tasks/detail.html:40
+#: tasks/templates/task_types/list.html:38 tasks/templates/tasks/detail.html:40
+#: tasks/templates/tasks/list.html:49
 msgid "Description"
 msgstr "Descrição"
 
-#: tasks/models.py:13
+#: tasks/models.py:13 tasks/templates/task_types/list.html:38
+#: tasks/templates/tasks/list.html:49
 msgid "Base Value"
 msgstr "Valor Base"
 
@@ -31,23 +33,21 @@ msgstr "Valor Base"
 msgid "The Value must be greater than 0"
 msgstr "O Valor deve ser maior que 0"
 
-#: tasks/models.py:22 tasks/models.py:42
-#: tasks/templates/task_types/detail.html:37
-#: tasks/templates/tasks/detail.html:37
+#: tasks/models.py:22 tasks/models.py:42 tasks/templates/tasks/detail.html:37
 msgid "Task Type"
 msgstr "Tipo de Serviço"
 
-#: tasks/models.py:23 tasks/templates/task_types/detail.html:3
+#: tasks/models.py:23 tasks/templates/task_types/components/stats.html:2
+#: tasks/templates/task_types/detail.html:3
 #: tasks/templates/task_types/detail.html:7
-#: tasks/templates/task_types/form.html:3
-#: tasks/templates/task_types/form.html:7
 #: tasks/templates/task_types/list.html:3
 #: tasks/templates/task_types/list.html:7
+#: tasks/templates/task_types/list.html:11
 msgid "Task Types"
 msgstr "Tipos de Serviços"
 
-#: tasks/models.py:33 tasks/templates/task_types/detail.html:43
-#: tasks/templates/tasks/detail.html:43 tasks/templates/tasks/detail.html:46
+#: tasks/models.py:33 tasks/templates/tasks/detail.html:43
+#: tasks/templates/tasks/detail.html:46
 msgid "Value"
 msgstr "Valor"
 
@@ -58,22 +58,42 @@ msgstr "Serviço"
 #: tasks/models.py:47 tasks/templates/tasks/detail.html:3
 #: tasks/templates/tasks/detail.html:7 tasks/templates/tasks/form.html:3
 #: tasks/templates/tasks/form.html:7 tasks/templates/tasks/list.html:3
-#: tasks/templates/tasks/list.html:7
+#: tasks/templates/tasks/list.html:7 tasks/templates/tasks/list.html:11
 msgid "Tasks"
 msgstr "Serviços"
 
+#: tasks/templates/task_types/components/rows.html:21
+msgid "No clients found"
+msgstr ""
+
+#: tasks/templates/task_types/components/stats.html:3
+#, fuzzy
+#| msgid "Base Value"
+msgid "Avarage Base Value"
+msgstr "Valor Base"
+
+#: tasks/templates/task_types/components/stats.html:4
+#, fuzzy
+#| msgid "Base Value"
+msgid "Highest Base Value"
+msgstr "Valor Base"
+
+#: tasks/templates/task_types/components/stats.html:5
+#, fuzzy
+#| msgid "Base Value"
+msgid "Lowest Base Value"
+msgstr "Valor Base"
+
 #: tasks/templates/task_types/detail.html:3
 #: tasks/templates/task_types/detail.html:7
-#: tasks/templates/task_types/detail.html:15
+#: tasks/templates/task_types/detail.html:14
 #: tasks/templates/tasks/detail.html:3 tasks/templates/tasks/detail.html:7
 #: tasks/templates/tasks/detail.html:15
 msgid "Detail"
 msgstr "Detalhes"
 
 #: tasks/templates/task_types/detail.html:13
-#: tasks/templates/task_types/form.html:13
-#: tasks/templates/task_types/list.html:20 tasks/templates/tasks/detail.html:13
-#: tasks/templates/tasks/form.html:13 tasks/templates/tasks/list.html:20
+#: tasks/templates/tasks/detail.html:13 tasks/templates/tasks/form.html:13
 msgid "List"
 msgstr "Lista"
 
@@ -87,45 +107,69 @@ msgstr "Voltar"
 msgid "Update"
 msgstr "Atualizar"
 
-#: tasks/templates/task_types/form.html:3
-#: tasks/templates/task_types/form.html:7
-#: tasks/templates/task_types/form.html:15 tasks/templates/tasks/form.html:3
-#: tasks/templates/tasks/form.html:7 tasks/templates/tasks/form.html:15
-msgid "Form"
-msgstr "Formulário"
+#: tasks/templates/task_types/detail.html:36
+#, fuzzy
+#| msgid "Task Type"
+msgid "Task Type Information"
+msgstr "Tipo de Serviço"
 
-#: tasks/templates/task_types/form.html:61 tasks/templates/tasks/form.html:61
-msgid "Cancel"
-msgstr "Cancelar"
+#: tasks/templates/task_types/detail.html:41
+msgid "Name"
+msgstr ""
 
-#: tasks/templates/task_types/form.html:64 tasks/templates/tasks/form.html:64
-msgid "Save"
-msgstr "Salvar"
+#: tasks/templates/task_types/detail.html:44
+msgid "Phone"
+msgstr ""
 
-#: tasks/templates/task_types/list.html:30
-msgid "Total Task Types"
-msgstr "Total de Tipos de Serviços"
+#: tasks/templates/task_types/detail.html:50
+msgid "Created At"
+msgstr ""
 
-#: tasks/templates/task_types/list.html:41
+#: tasks/templates/task_types/detail.html:51
+#, fuzzy
+#| msgid "Update"
+msgid "Updated At"
+msgstr "Atualizar"
+
+#: tasks/templates/task_types/form.html:9
+#, fuzzy
+#| msgid "New Task Type"
+msgid "Update Task Type"
+msgstr "Novo Tipo de Serviço"
+
+#: tasks/templates/task_types/form.html:11
+#: tasks/templates/task_types/list.html:33 tasks/templates/tasks/list.html:44
 msgid "New Task Type"
 msgstr "Novo Tipo de Serviço"
 
-#: tasks/templates/task_types/list.html:46 tasks/templates/tasks/list.html:46
-msgid "Next"
-msgstr "Novo"
+#: tasks/templates/task_types/form.html:77 tasks/templates/tasks/form.html:64
+msgid "Save"
+msgstr "Salvar"
 
-#: tasks/templates/task_types/list.html:47 tasks/templates/tasks/list.html:47
-msgid "Previous"
-msgstr "Voltar"
+#: tasks/templates/tasks/form.html:3 tasks/templates/tasks/form.html:7
+#: tasks/templates/tasks/form.html:15
+msgid "Form"
+msgstr "Formulário"
 
-#: tasks/templates/task_types/list.html:48 tasks/templates/tasks/list.html:48
-msgid "Search..."
-msgstr "Pesquisar..."
+#: tasks/templates/tasks/form.html:61
+msgid "Cancel"
+msgstr "Cancelar"
 
-#: tasks/templates/tasks/list.html:30
+#: tasks/templates/tasks/list.html:27
 msgid "Total Tasks"
 msgstr "Total de Serviços"
 
-#: tasks/templates/tasks/list.html:41
-msgid "New Task"
-msgstr "Novo Serviço"
+#~ msgid "New Task"
+#~ msgstr "Novo Serviço"
+
+#~ msgid "Next"
+#~ msgstr "Novo"
+
+#~ msgid "Previous"
+#~ msgstr "Voltar"
+
+#~ msgid "Search..."
+#~ msgstr "Pesquisar..."
+
+#~ msgid "Total Task Types"
+#~ msgstr "Total de Tipos de Serviços"

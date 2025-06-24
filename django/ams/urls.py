@@ -11,6 +11,5 @@ urlpatterns = [
     path("clients/", include("clients.urls")),
     path("delete/<str:app_label>/<str:model>/<uuid:pk>/", GenericDeleteView.as_view(), name="delete"),
     path("orders/", include("orders.urls.orders")),
-    path("tasks/", include("tasks.urls.tasks")),
     path("task-types/", include("tasks.urls.task_type")),
 ]

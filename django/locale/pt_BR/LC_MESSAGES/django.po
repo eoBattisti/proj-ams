@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-20 11:38-0300\n"
+"POT-Creation-Date: 2025-06-21 17:28-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,14 @@ msgstr "Inglês"
 #: ams/settings.py:131
 msgid "Brazilian Portuguese"
 msgstr "Português do Brasil"
+
+#: ams/templates/components/delete_modal.html:10
+msgid "Are you sure you want to delete?"
+msgstr ""
+
+#: ams/templates/components/delete_modal.html:16
+msgid "Yes"
+msgstr ""
 
 #: ams/templates/components/navbar.html:13
 msgid "Sewing"
@@ -46,30 +54,23 @@ msgstr "Tipos de Serviços"
 msgid "Orders"
 msgstr "Pedidos"
 
-#: ams/templates/cotton/table/index.html:30
-#: ams/templates/cotton/table/index.html:66
+#: ams/templates/cotton/table/index.html:16
+msgid "Search"
+msgstr ""
+
+#: ams/templates/cotton/table/index.html:62
 msgid "Previous"
 msgstr ""
 
-#: ams/templates/cotton/table/index.html:38
-#: ams/templates/cotton/table/index.html:89
+#: ams/templates/cotton/table/index.html:67
+msgid "Page"
+msgstr ""
+
+#: ams/templates/cotton/table/index.html:77
 msgid "Next"
 msgstr ""
 
-#: ams/templates/cotton/table/index.html:45
 #, fuzzy
-#| msgid "Sewing"
-msgid "Showing"
-msgstr "Costura"
-
-#: ams/templates/cotton/table/index.html:47
-msgid "to"
-msgstr ""
-
-#: ams/templates/cotton/table/index.html:49
-msgid "of"
-msgstr ""
-
-#: ams/templates/cotton/table/index.html:51
-msgid "results"
-msgstr ""
+#~| msgid "Sewing"
+#~ msgid "Showing"
+#~ msgstr "Costura"
