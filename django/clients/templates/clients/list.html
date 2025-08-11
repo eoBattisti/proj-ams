@@ -50,6 +50,7 @@
       if (event.detail.xhr.status == 200 && event.detail.elt.tagName == "DIV") {
         console.log(event.detail.elt);
         htmx.trigger("#tbody", "refreshClients");
+        <!-- htmx.trigger(".stats", "refreshClients") -->
       }
     });
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-21 17:28-0300\n"
+"POT-Creation-Date: 2025-08-11 15:34-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,14 +43,10 @@ msgid "Clients"
 msgstr "Clientes"
 
 #: ams/templates/components/navbar.html:21
-msgid "Tasks"
-msgstr "Serviços"
-
-#: ams/templates/components/navbar.html:22
 msgid "Task Types"
 msgstr "Tipos de Serviços"
 
-#: ams/templates/components/navbar.html:23
+#: ams/templates/components/navbar.html:22
 msgid "Orders"
 msgstr "Pedidos"
 
@@ -69,6 +65,9 @@ msgstr ""
 #: ams/templates/cotton/table/index.html:77
 msgid "Next"
 msgstr ""
+
+#~ msgid "Tasks"
+#~ msgstr "Serviços"
 
 #, fuzzy
 #~| msgid "Sewing"
