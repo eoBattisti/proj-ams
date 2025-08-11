@@ -18,9 +18,9 @@ class TaskForm(ModelForm):
         model = Task
         fields = ["description", "value", "task_type"]
         widgets = {
-            "description": forms.TextInput(attrs={"class": "form-control", "autofocus": True}),
-            "value": forms.NumberInput(attrs={"class": "form-control", "value": 0, "min": 0, "step": 1}),
-            "task_type": forms.Select(attrs={"class": "form-select"}),
+            "description": forms.TextInput(attrs={"class": "input input-bordered w-full", "autofocus": True}),
+            "value": forms.NumberInput(attrs={"class": "input input-bordered w-full", "value": 0, "min": 0, "step": 1}),
+            "task_type": forms.Select(attrs={"class": "select select-bordered w-full"}),
         }
 
     def __init__(self, *args, **kwargs):

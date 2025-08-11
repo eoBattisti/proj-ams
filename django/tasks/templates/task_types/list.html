@@ -16,7 +16,7 @@
 <div
   class="stats shadow mx-3 my-2"
   hx-get="{% url 'task_types:stats' %}"
-  hx-trigger="load, refresh"
+  hx-trigger="load, refreshClients"
   hx-swap="innerHTML"
 >
 </div>
@@ -51,6 +51,8 @@
       if (event.detail.xhr.status == 200 && event.detail.elt.tagName == "DIV") {
         console.log(event.detail.elt);
         htmx.trigger("#tbody", "refreshClients");
+        <!-- htmx.trigger(".stats", "refreshClients"); -->
+
       }
     });
 
