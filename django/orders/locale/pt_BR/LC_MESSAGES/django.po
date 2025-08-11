@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-09 14:04-0300\n"
+"POT-Creation-Date: 2025-08-11 19:28-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: orders/models.py:9 orders/templates/orders/detail.html:38
+#: orders/templates/orders/list.html:35
 msgid "Client"
 msgstr "Cliente"
 
@@ -27,6 +28,7 @@ msgid "Discount"
 msgstr "Discount"
 
 #: orders/models.py:11 orders/templates/orders/detail.html:50
+#: orders/templates/orders/list.html:35
 msgid "Completed"
 msgstr "Concluído"
 
@@ -35,10 +37,12 @@ msgid "Services"
 msgstr "Serviços"
 
 #: orders/models.py:13 orders/templates/orders/detail.html:44
+#: orders/templates/orders/list.html:35
 msgid "Due Date"
 msgstr "Data de Entrega"
 
 #: orders/models.py:14 orders/templates/orders/detail.html:41
+#: orders/templates/orders/list.html:35
 #, fuzzy
 #| msgid "Order Type"
 msgid "Order Date"
@@ -50,10 +54,34 @@ msgstr "Pedido"
 
 #: orders/models.py:18 orders/templates/orders/detail.html:3
 #: orders/templates/orders/detail.html:7 orders/templates/orders/form.html:3
-#: orders/templates/orders/form.html:7 orders/templates/orders/list.html:3
-#: orders/templates/orders/list.html:7
+#: orders/templates/orders/form.html:7 orders/templates/orders/list.html:4
+#: orders/templates/orders/list.html:8 orders/templates/orders/list.html:12
 msgid "Orders"
 msgstr "Pedidos"
+
+#: orders/templates/orders/components/stats.html:2
+#, fuzzy
+#| msgid "Orders"
+msgid "Total Orders"
+msgstr "Pedidos"
+
+#: orders/templates/orders/components/stats.html:3
+#, fuzzy
+#| msgid "Completed"
+msgid "Completed Orders"
+msgstr "Concluído"
+
+#: orders/templates/orders/components/stats.html:4
+#, fuzzy
+#| msgid "Order"
+msgid "Pending Orders"
+msgstr "Novo Pedido"
+
+#: orders/templates/orders/components/stats.html:5
+#, fuzzy
+#| msgid "Order"
+msgid "Late Orders"
+msgstr "Novo Pedido"
 
 #: orders/templates/orders/detail.html:3 orders/templates/orders/detail.html:7
 #: orders/templates/orders/detail.html:15
@@ -61,7 +89,6 @@ msgid "Detail"
 msgstr "Detalhes"
 
 #: orders/templates/orders/detail.html:13 orders/templates/orders/form.html:13
-#: orders/templates/orders/list.html:20
 msgid "List"
 msgstr "Lista"
 
@@ -73,11 +100,11 @@ msgstr "Voltar"
 msgid "Update"
 msgstr ""
 
-#: orders/templates/orders/detail.html:47
+#: orders/templates/orders/detail.html:47 orders/templates/orders/list.html:35
 msgid "Total"
 msgstr ""
 
-#: orders/templates/orders/detail.html:61
+#: orders/templates/orders/detail.html:61 orders/templates/orders/form.html:72
 msgid "Tasks"
 msgstr ""
 
@@ -94,35 +121,39 @@ msgstr "Valor"
 msgid "Form"
 msgstr "Formulário"
 
-#: orders/templates/orders/form.html:64
+#: orders/templates/orders/form.html:60
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: orders/templates/orders/form.html:67
+#: orders/templates/orders/form.html:63
 msgid "Save"
 msgstr "Salvar"
 
-#: orders/templates/orders/list.html:30
-msgid "Total Tasks"
-msgstr "Total de Serviços"
+#: orders/templates/orders/form.html:114
+msgid "Delete Task"
+msgstr ""
 
-#: orders/templates/orders/list.html:41
+#: orders/templates/orders/form.html:125
+msgid "Add Task"
+msgstr ""
+
+#: orders/templates/orders/list.html:30
 #, fuzzy
 #| msgid "Order"
 msgid "New Order"
 msgstr "Novo Pedido"
 
-#: orders/templates/orders/list.html:46
-msgid "Next"
-msgstr "Próximo"
+#~ msgid "Total Tasks"
+#~ msgstr "Total de Serviços"
 
-#: orders/templates/orders/list.html:47
-msgid "Previous"
-msgstr "Anterior"
+#~ msgid "Next"
+#~ msgstr "Próximo"
 
-#: orders/templates/orders/list.html:48
-msgid "Search..."
-msgstr "Pesquisar..."
+#~ msgid "Previous"
+#~ msgstr "Anterior"
+
+#~ msgid "Search..."
+#~ msgstr "Pesquisar..."
 
 #~ msgid "The Base Value must be greater than 0"
 #~ msgstr "O Valor Base deve ser maior que 0"

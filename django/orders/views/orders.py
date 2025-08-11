@@ -1,4 +1,5 @@
 import json
+import datetime as dt
 from typing import Any
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -71,6 +72,46 @@ class OrderDetailView(LoginRequiredMixin, DetailView):
     model = Order
     template_name = "orders/detail.html"
     context_object_name = "order"
+
+
+class OrderHTMXStatsView(LoginRequiredMixin, ListView):
+    model = Order
+    template_name = "orders/components/stats.html"
+    context_object_name = "orders"
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        orders: Order = self.get_queryset()
+
+        today = dt.date.today()
+
+        context["total_orders"] = orders.count()
+        context["completed_orders"] = orders.filter(completed=True).count()
+        context["pending_orders"] = orders.filter(due_date__gt=today, completed=False).count()
+        context["late_orders"] = orders.filter(due_date__lt=today, completed=False).count()
+        return context
+
+class OrderHTMXListView(LoginRequiredMixin, ListView):
+    model = Order
+    template_name = "orders/components/rows.html"
+    context_object_name = "orders"
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        search = self.request.GET.get("search")
+        orders: QuerySet[Order] = super().get_queryset()
+
+        if search:
+            orders = orders.filter(client__name__icontains=search)
+
+        page_number = self.request.GET.get("page", 1)
+        paginator = Paginator(orders, self.paginate_by)
+        page_obj = paginator.get_page(page_number)
+
+        context[self.context_object_name] = page_obj
+        return context
+
 
 
 class OrderCreateView(LoginRequiredMixin, CreateView):

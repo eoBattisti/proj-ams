@@ -1,0 +1,29 @@
+{% load i18n %}
+
+{% for obj in orders %}
+<c-table.tr>
+  <c-table.td>{{ obj.client }}</c-table.td>
+  <c-table.td>{{ obj.due_date }}</c-table.td>
+  <c-table.td>{{ obj.order_date }}</c-table.td>
+  <c-table.td>{{ obj.total }}</c-table.td>
+  <c-table.td>
+    <a class="btn btn-soft" href="{% url 'orders:detail' obj.id %}">
+      <i class="bi bi-eye-fill"></i>
+    </a >
+    <button class="btn btn-soft btn-info" hx-get="{% url 'orders:update' obj.id %}" onclick="modal.showModal()" hx-target="#modal-content" hx-swap="innerHTML">
+      <i class="bi bi-pen-fill"></i>
+    </button>
+    <button class="btn btn-soft btn-error" hx-get="{% url 'delete' 'orders' 'order' obj.id %}" onclick="modal.showModal()" hx-target="#modal-content" hx-swap="innerHTML">
+      <i class="bi bi-trash-fill"></i>
+    </button>
+  </c-table.td>
+</c-table.tr>
+{% empty %}
+<c-table.tr>
+  <c-table.td colspan="4">
+    <p class="text-center font-bold p-3">{% trans 'No clients found' %}</p>
+  </c-table.td>
+</c-table.tr>
+{% endfor %}
+
+ 

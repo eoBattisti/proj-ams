@@ -8,11 +8,11 @@ class OrderForm(ModelForm):
         model = Order
         fields = ["client", "discount", "completed", "due_date", "order_date"]
         widgets = {
-            "client": forms.Select(attrs={"class": "form-select"}),
-            "discount": forms.NumberInput(attrs={"class": "form-control", "value": 0, "min": 0, "max": 100, "step": 1}),
-            "completed": forms.CheckboxInput(attrs={"class": "form-check-input", "for": "completed"}),
-            "due_date": forms.DateInput(attrs={"class": "form-control", "type": "date", "format": "%d/%m/%Y"}),
-            "order_date": forms.DateInput(attrs={"class": "form-control", "type": "date", "format": "%d/%m/%Y"}),
+            "client": forms.Select(attrs={"class": "select select-bordered w-full"}),
+            "discount": forms.NumberInput(attrs={"class": "input input-bordered w-full", "value": 0, "min": 0, "max": 100, "step": 1}),
+            "completed": forms.CheckboxInput(attrs={"class": "checkbox checkbox-primary"}),
+            "due_date": forms.DateInput(attrs={"class": "input input-bordered w-full", "type": "date", "format": "%Y-%m-%d"}),
+            "order_date": forms.DateInput(attrs={"class": "input input-bordered w-full", "type": "date", "format": "%Y-%m-%d"}),
         }
 
     def __init__(self, *args, **kwargs):

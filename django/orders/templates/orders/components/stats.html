@@ -1,0 +1,5 @@
+{% load i18n %}
+<c-stat title="{% trans 'Total Orders' %}" value="{{ total_orders }}" color="neutral" />
+<c-stat title="{% trans 'Completed Orders' %}" value="{{ completed_orders }}" color="neutral" />
+<c-stat title="{% trans 'Pending Orders' %}" value="{{ pending_orders }}" color="neutral" />
+<c-stat title="{% trans 'Late Orders' %}" value="{{ late_orders }}" color="neutral" />

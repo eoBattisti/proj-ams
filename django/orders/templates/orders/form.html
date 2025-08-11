@@ -27,37 +27,33 @@
       <div class="card shadow">
         <div class="card-body">
 
-            <div class="row">
-            {% for field in form %}
-            <div class="mb-3 col-md-6">
-
-              {% if field.field.widget.input_type == 'checkbox' %}
-              <div class="form-check">
-                <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
-                <input class="form-check-input" type="checkbox" value="" id="{{ field.id_for_label }}" />
-              </div>
-              {% else %}
-              <label for="{{ field.id_for_label }}" class="form-label">
-                {{ field.label }}
-              </label>
-                {{ field }}
-              {% endif %}
-
-              {% if field.errors %}
-              {% for error in field.errors %}
-              <div class="invalid-feedback d-block">
-                {{ error }}
-              </div>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              {% for field in form %}
+                <div class="form-control {% if field.field.widget.input_type == 'checkbox' %}flex items-center{% endif %}">
+                  {% if field.field.widget.input_type == 'checkbox' %}
+                    <label class="label cursor-pointer">
+                      {{ field }}
+                      <span class="label-text">{{ field.label }}</span>
+                    </label>
+                  {% else %}
+                    <label class="label">
+                      <span class="label-text">{{ field.label }}</span>
+                      {{ field }}
+                    </label>
+                  {% endif %}
+                  {% if field.help_text %}
+                    <small class="text-sm text-gray-500">{{ field.help_text }}</small>
+                  {% endif %}
+                  {% if field.errors %}
+                    <div class="text-error mt-1">
+                      {% for error in field.errors %}
+                        <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
               {% endfor %}
-              {% endif %}
-
-              {% if field.help_text %}
-              <small class="form-text text-muted">
-                {{ field.help_text }}
-              </small>
-              {% endif %}
             </div>
-            {% endfor %}
 
             <div class="d-flex mt-4 justify-content-end">
               <a href="{% url 'orders:list' %}" class="btn btn-secondary mx-2">
@@ -71,30 +67,66 @@
         </div>
       </div>
 
-      <div class="card mb-3">
-        <div class="card-header">
-            <h5 class="card-title">Tasks</h5>
-        </div>
+      <div class="card bg-base-100 shadow mb-3">
         <div class="card-body">
-            {# Important: Include the management form here #}
-            {{ task_formset.management_form }}
-            <div id="task-forms">
-                {% for form in task_formset.forms %}
-                    <div class="task-form mb-3">
-                        {{ form.as_p }}
-                        {% if task_formset.can_delete %}
-                            <div class="form-check">
-                                {{ form.DELETE }}
-                                <label class="form-check-label">Delete this task</label>
-                            </div>
-                        {% endif %}
-                        <hr>
-                    </div>
-                {% endfor %}
-            </div>
-            <button type="button" id="add-task" class="btn btn-secondary">Add Another Task</button>
+          <h5 class="card-title mb-4">{% trans 'Tasks' %}</h5>
+          {{ task_formset.management_form }}
+          <div id="task-forms" class="space-y-4">
+            {% for tform in task_formset.forms %}
+              <div class="card bg-base-100 shadow p-4">
+                <div class="grid grid-cols-4 gap-4">
+                  <div class="form-control">
+                    <label class="label">
+                      <span class="label-text">{{ tform.description.label }}</span>
+                    </label>
+                    {{ tform.description }}
+                    {% if tform.description.errors %}
+                      {% for error in tform.description.errors %}
+                        <p class="text-error">{{ error }}</p>
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                  <div class="form-control">
+                    <label class="label">
+                      <span class="label-text">{{ tform.value.label }}</span>
+                    </label>
+                    {{ tform.value }}
+                    {% if tform.value.errors %}
+                      {% for error in tform.value.errors %}
+                        <p class="text-error">{{ error }}</p>
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                  <div class="form-control">
+                    <label class="label">
+                      <span class="label-text">{{ tform.task_type.label }}</span>
+                    </label>
+                    {{ tform.task_type }}
+                    {% if tform.task_type.errors %}
+                      {% for error in tform.task_type.errors %}
+                        <p class="text-error">{{ error }}</p>
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                  {% if task_formset.can_delete %}
+                  <div class="form-control flex items-center">
+                    <div class="hidden">{{ tform.DELETE }}</div>
+                    <button type="button" class="btn btn-error btn-sm delete-task ml-2" title="{% trans 'Delete Task' %}">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="mt-4">
+            <button type="button" id="add-task-inline" class="btn btn-outline btn-sm">
+              <i class="bi bi-plus mr-1"></i>{% trans 'Add Task' %}
+            </button>
+          </div>
         </div>
-    </div>
+      </div>
 
     </div>
   </div>
@@ -102,31 +134,60 @@
 </div>
 
 <script>
-document.getElementById('add-task').addEventListener('click', function() {
-    const forms = document.getElementsByClassName('task-form');
-    const formNum = forms.length;
-    const totalForms = document.querySelector('#id_tasks-TOTAL_FORMS');
-    
-    const newForm = forms[0].cloneNode(true);
-    
-    // Clear the values in the cloned form
-    newForm.querySelectorAll('input:not([type=hidden])').forEach(input => {
-        input.value = '';
-    });
-    newForm.querySelectorAll('select').forEach(select => {
-        select.selectedIndex = 0;
-    });
-    
-    // Update form index
-    newForm.innerHTML = newForm.innerHTML.replace(
-        /tasks-(\d+)-/g,
-        function(match, p1) {
-            return `tasks-${formNum}-`;
+// Manage dynamic inline task formset
+const addTaskBtn = document.getElementById('add-task-inline');
+addTaskBtn.addEventListener('click', function() {
+    const formsContainer = document.getElementById('task-forms');
+    const totalFormsInput = document.querySelector('#id_tasks-TOTAL_FORMS');
+    // Current number of forms
+    const formIndex = parseInt(totalFormsInput.value, 10);
+
+    // Clone the first form row as template
+    const templateRow = formsContainer.querySelector('.card');
+    const newRow = templateRow.cloneNode(true);
+
+    // Reset input/select values in the cloned row
+    newRow.querySelectorAll('input, select, textarea').forEach(el => {
+        if (el.type === 'checkbox' || el.type === 'radio') {
+            el.checked = false;
+        } else if (el.tagName.toLowerCase() === 'select') {
+            el.selectedIndex = 0;
+        } else {
+            el.value = '';
         }
-    );
-    
-    document.getElementById('task-forms').appendChild(newForm);
-    totalForms.value = formNum + 1;
+    });
+    // Clear any displayed errors
+    newRow.querySelectorAll('.text-error').forEach(e => e.textContent = '');
+
+    // Update form index in names and ids
+    const nameRegex = new RegExp('tasks-(\\d+)-', 'g');
+    const idRegex = new RegExp('id_tasks-(\\d+)-', 'g');
+    newRow.innerHTML = newRow.innerHTML.replace(nameRegex, 'tasks-' + formIndex + '-');
+    newRow.innerHTML = newRow.innerHTML.replace(idRegex, 'id_tasks-' + formIndex + '-');
+
+    // Append the new row
+    formsContainer.appendChild(newRow);
+    // Increment total forms
+    totalFormsInput.value = formIndex + 1;
+});
+
+// Handle deletion of task forms
+const tasksContainer = document.getElementById('task-forms');
+tasksContainer.addEventListener('click', function(event) {
+    const deleteBtn = event.target.closest('.delete-task');
+    if (!deleteBtn) return;
+    const row = deleteBtn.closest('.card');
+    if (!row) return;
+    // If delete checkbox exists (formset delete), check it
+    const deleteCheckbox = row.querySelector('input[type="checkbox"][name$="-DELETE"]');
+    if (deleteCheckbox) {
+        deleteCheckbox.checked = true;
+    }
+    // Remove the row from DOM
+    row.remove();
+    // Update total forms count
+    const totalFormsInput = document.querySelector('#id_tasks-TOTAL_FORMS');
+    totalFormsInput.value = document.getElementById('task-forms').children.length;
 });
 </script>
 {% endblock content %}
